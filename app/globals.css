@@ -6,6 +6,84 @@
   --muted: rgba(255, 255, 255, 0.72);
   --soft: rgba(255, 255, 255, 0.52);
   --line: rgba(255, 255, 255, 0.1);
+
+  --va-bg: #0f172a;
+  --va-card: #1e293b;
+  --va-text: #f8fafc;
+  --va-gold: #fbbf24;
+  --va-purple: rgba(168, 85, 247, 0.55);
+}
+
+/* Locomotive Scroll Styles */
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+html.has-scroll-dragging {
+  user-select: none;
+}
+
+.has-scroll-smooth body {
+  overflow: hidden;
+}
+
+.c-scrollbar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10px;
+  height: 100vh;
+  transform-origin: center right;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0;
+  z-index: 9999;
+}
+
+.c-scrollbar:hover {
+  transform: scaleX(1.45);
+}
+
+.c-scrollbar:hover,
+.has-scroll-scrolling .c-scrollbar,
+.has-scroll-dragging .c-scrollbar {
+  opacity: 1;
+}
+
+.c-scrollbar_thumb {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 7px;
+  height: 100%;
+  background-color: #8b5cf6;
+  border-radius: 10px;
+  opacity: 0.8;
+  cursor: grab;
+}
+
+.c-scrollbar_thumb:active {
+  cursor: grabbing;
+}
+
+/* Hide default scrollbar when using Locomotive Scroll */
+html.has-scroll-smooth ::-webkit-scrollbar {
+  display: none;
+}
+
+html.has-scroll-smooth {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Ensure smooth-scroll-container has proper structure */
+.smooth-scroll-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+[data-scroll-container] {
+  perspective: 1px;
+  transform-style: preserve-3d;
 }
 
 * {
@@ -56,6 +134,535 @@ ul {
     radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.12), transparent 18%),
     radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08), transparent 14%),
     linear-gradient(180deg, #010101 0%, #050505 100%);
+}
+
+/* Scroll fade-in utility (used in Services page) */
+[data-fadein="true"] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms ease, transform 700ms ease;
+  will-change: opacity, transform;
+}
+
+[data-fadein="true"][data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-fadein="true"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Services page (premium dark spiritual theme) */
+.va-services-page {
+  background: radial-gradient(circle at 25% 10%, rgba(251, 191, 36, 0.08), transparent 45%),
+    radial-gradient(circle at 70% 20%, rgba(168, 85, 247, 0.12), transparent 40%),
+    linear-gradient(180deg, #070c1a 0%, var(--va-bg) 55%, #050816 100%);
+}
+
+.va-services-hero {
+  position: relative;
+  padding: 8.25rem 2rem 5rem;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--va-text);
+}
+
+.va-services-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.va-services-stars {
+  position: absolute;
+  inset: 0;
+  opacity: 0.85;
+}
+
+.va-services-stars-back {
+  background-image:
+    radial-gradient(circle, rgba(248, 250, 252, 0.75) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(248, 250, 252, 0.35) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle, rgba(248, 250, 252, 0.25) 0 1px, transparent 2px);
+  background-size: 190px 190px, 270px 270px, 340px 340px;
+  background-position: 0 0, 70px 40px, 40px 110px;
+  filter: blur(0.2px);
+}
+
+.va-services-stars-front {
+  background-image:
+    radial-gradient(circle, rgba(248, 250, 252, 0.7) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(248, 250, 252, 0.3) 0 1.4px, transparent 2.4px);
+  background-size: 310px 310px, 210px 210px;
+  background-position: 0 0, 80px 120px;
+  opacity: 0.55;
+}
+
+.va-services-nebula {
+  position: absolute;
+  width: 55vw;
+  height: 55vw;
+  max-width: 780px;
+  max-height: 780px;
+  border-radius: 999px;
+  filter: blur(32px);
+  opacity: 0.9;
+}
+
+.va-services-nebula-one {
+  left: -10%;
+  top: 12%;
+  background: radial-gradient(circle at 30% 30%, rgba(168, 85, 247, 0.35), transparent 55%),
+    radial-gradient(circle at 60% 60%, rgba(56, 189, 248, 0.16), transparent 60%);
+}
+
+.va-services-nebula-two {
+  right: -18%;
+  top: 2%;
+  background: radial-gradient(circle at 30% 30%, rgba(251, 191, 36, 0.22), transparent 55%),
+    radial-gradient(circle at 60% 60%, rgba(168, 85, 247, 0.22), transparent 60%);
+}
+
+.va-services-glow {
+  position: absolute;
+  inset: auto;
+  left: 50%;
+  bottom: -220px;
+  width: 720px;
+  height: 720px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  filter: blur(54px);
+  opacity: 0.5;
+}
+
+.va-services-glow-gold {
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.22), transparent 60%);
+}
+
+.va-services-shell {
+  max-width: 1180px;
+}
+
+.va-services-header {
+  max-width: 760px;
+  text-align: left;
+}
+
+.va-services-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(248, 250, 252, 0.78);
+}
+
+.va-services-kicker::before {
+  content: "";
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.95));
+}
+
+.va-services-title {
+  margin: 0.9rem 0 0.85rem;
+  font-family: var(--font-cinzel), serif;
+  font-size: clamp(2.1rem, 3.6vw, 3.2rem);
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+}
+
+.va-services-intro {
+  margin: 0;
+  color: rgba(248, 250, 252, 0.78);
+  line-height: 1.75;
+  font-size: 1.08rem;
+}
+
+.va-services-grid {
+  margin-top: 2.4rem;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1.35rem;
+}
+
+.va-services-grid > * {
+  animation: vaStagger 900ms ease both;
+  animation-delay: var(--va-delay, 0ms);
+}
+
+@keyframes vaStagger {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.va-service-card {
+  position: relative;
+  border-radius: 20px;
+  padding: 0;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.7));
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 20px 60px rgba(2, 6, 23, 0.55),
+    0 0 0 1px rgba(251, 191, 36, 0.04) inset;
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  overflow: hidden;
+}
+
+.va-service-card-inner {
+  position: relative;
+  padding: 1.35rem 1.35rem 1.25rem;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.va-service-card-ornament {
+  position: absolute;
+  inset: -1px;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(251, 191, 36, 0.16), transparent 42%),
+    radial-gradient(circle at 85% 25%, rgba(168, 85, 247, 0.14), transparent 44%),
+    radial-gradient(circle at 40% 110%, rgba(56, 189, 248, 0.08), transparent 52%),
+    conic-gradient(from 150deg at 50% 50%, rgba(251, 191, 36, 0.06), rgba(168, 85, 247, 0.06), rgba(56, 189, 248, 0.05), rgba(251, 191, 36, 0.06));
+  opacity: 0.75;
+  pointer-events: none;
+  filter: blur(0.2px);
+}
+
+.va-service-card-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, transparent 0%, rgba(248, 250, 252, 0.06) 18%, transparent 36%);
+  transform: translateX(-120%);
+  transition: transform 700ms ease;
+  pointer-events: none;
+}
+
+.va-service-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 22px;
+  background: radial-gradient(circle at 20% 15%, rgba(251, 191, 36, 0.18), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(168, 85, 247, 0.18), transparent 50%);
+  opacity: 0;
+  transition: opacity 240ms ease;
+  pointer-events: none;
+}
+
+.va-service-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(251, 191, 36, 0.26);
+  box-shadow:
+    0 24px 70px rgba(2, 6, 23, 0.62),
+    0 0 0 1px rgba(251, 191, 36, 0.06) inset,
+    0 0 44px rgba(168, 85, 247, 0.16);
+}
+
+.va-service-card:hover .va-service-card-inner::after {
+  transform: translateX(120%);
+}
+
+.va-service-card:hover::before {
+  opacity: 1;
+}
+
+.va-service-card-top {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.va-service-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 30% 30%, rgba(251, 191, 36, 0.18), transparent 58%),
+    rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(251, 191, 36, 0.18);
+  box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.12) inset;
+  position: relative;
+}
+
+.va-service-icon-ring {
+  position: absolute;
+  inset: -10px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.12), transparent 58%);
+  filter: blur(4px);
+  opacity: 0.7;
+  transform: scale(0.98);
+  transition: transform 240ms ease, opacity 240ms ease;
+}
+
+.va-service-card:hover .va-service-icon-ring {
+  transform: scale(1.04);
+  opacity: 1;
+}
+
+.va-service-icon svg {
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.18));
+  animation: vaIconGlow 2.8s ease-in-out infinite;
+}
+
+.va-icon-stroke {
+  stroke: rgba(248, 250, 252, 0.86);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.va-icon-fade {
+  stroke: rgba(251, 191, 36, 0.65);
+}
+
+.va-icon-fill {
+  fill: rgba(251, 191, 36, 0.9);
+}
+
+@keyframes vaIconGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.14));
+  }
+  50% {
+    filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.22));
+  }
+}
+
+.va-service-title {
+  margin: 0.15rem 0 0.45rem;
+  font-size: 1.22rem;
+  letter-spacing: 0.01em;
+}
+
+.va-service-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.55rem;
+}
+
+.va-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgba(248, 250, 252, 0.86);
+  background: rgba(15, 23, 42, 0.42);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.va-chip::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(251, 191, 36, 0.9);
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.24);
+}
+
+.va-chip-muted {
+  color: rgba(248, 250, 252, 0.78);
+}
+
+.va-chip-muted::before {
+  background: rgba(168, 85, 247, 0.8);
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.22);
+}
+
+.va-service-desc {
+  margin: 0;
+  color: rgba(248, 250, 252, 0.74);
+  line-height: 1.65;
+}
+
+.va-service-benefits {
+  margin-top: 1.05rem;
+  display: grid;
+  gap: 0.55rem;
+  color: rgba(248, 250, 252, 0.78);
+  line-height: 1.55;
+  font-size: 0.98rem;
+}
+
+.va-service-benefits li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.va-service-benefits li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, rgba(251, 191, 36, 0.95), rgba(251, 191, 36, 0.25));
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.2);
+  transform: translateY(-50%);
+}
+
+.va-service-actions {
+  margin-top: 1.15rem;
+}
+
+.va-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.9rem 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
+  outline: none;
+}
+
+.va-btn:focus-visible {
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.22);
+}
+
+.va-btn-card {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(251, 191, 36, 0.18), rgba(168, 85, 247, 0.12));
+  border-color: rgba(251, 191, 36, 0.22);
+  color: var(--va-text);
+  gap: 0.6rem;
+}
+
+.va-btn-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 26px rgba(251, 191, 36, 0.18);
+  border-color: rgba(251, 191, 36, 0.34);
+}
+
+.va-btn-arrow {
+  display: inline-block;
+  transform: translateX(0);
+  transition: transform 180ms ease;
+}
+
+.va-btn-card:hover .va-btn-arrow {
+  transform: translateX(4px);
+}
+
+.va-services-cta {
+  margin-top: 1.6rem;
+  border-radius: 22px;
+  padding: 1.55rem 1.5rem;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.58), rgba(15, 23, 42, 0.62));
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 20px 55px rgba(2, 6, 23, 0.55),
+    0 0 0 1px rgba(251, 191, 36, 0.04) inset;
+}
+
+.va-services-cta h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  font-family: var(--font-cinzel), serif;
+}
+
+.va-services-cta p {
+  margin: 0;
+  color: rgba(248, 250, 252, 0.78);
+  line-height: 1.65;
+}
+
+.va-services-cta-actions {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.va-btn-primary {
+  background: linear-gradient(90deg, rgba(251, 191, 36, 0.95), rgba(251, 191, 36, 0.72));
+  color: #0b1222;
+  box-shadow: 0 0 0 rgba(251, 191, 36, 0);
+}
+
+.va-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.26);
+}
+
+.va-btn-secondary {
+  background: rgba(15, 23, 42, 0.45);
+  border-color: rgba(148, 163, 184, 0.18);
+  color: rgba(248, 250, 252, 0.9);
+}
+
+.va-btn-secondary:hover {
+  transform: translateY(-2px);
+  border-color: rgba(168, 85, 247, 0.34);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.16);
+}
+
+@media (max-width: 1024px) {
+  .va-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .va-services-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .va-services-cta-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .va-services-hero {
+    padding: 7.5rem 1.15rem 4rem;
+  }
+  .va-services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Desktop layout: 3 cards first row, then 2 centered cards */
+@media (min-width: 1025px) {
+  .va-service-card {
+    grid-column: span 2;
+  }
+
+  .va-service-card:nth-child(n + 4) {
+    grid-column: span 3;
+  }
 }
 
 .site-header {
@@ -2686,7 +3293,7 @@ ul {
   }
 }
 
-/* ─── GEMSTONE SECTION: Immersive Planetary Layout ─── */
+/* ─── GEMSTONE SECTION: Immersive Planetary Layout (Home) ─── */
 
 .gemstones-section {
   padding: 6rem 2rem 8rem;
@@ -2723,8 +3330,12 @@ ul {
 }
 
 @keyframes gemZodiacSpin {
-  from { transform: translateY(-50%) rotate(0deg); }
-  to   { transform: translateY(-50%) rotate(360deg); }
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
 }
 
 /* Two-column layout */
@@ -2751,7 +3362,7 @@ ul {
   font-size: clamp(2.1rem, 3.8vw, 3.4rem);
   line-height: 1.08;
   color: var(--gold);
-  text-shadow: 0 0 40px rgba(228,175,86,0.22), 0 8px 30px rgba(0,0,0,0.35);
+  text-shadow: 0 0 40px rgba(228, 175, 86, 0.22), 0 8px 30px rgba(0, 0, 0, 0.35);
   margin-top: 0.6rem;
 }
 
@@ -2786,164 +3397,175 @@ ul {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(228,175,86,0.12);
-  border: 1px solid rgba(228,175,86,0.25);
+  background: rgba(228, 175, 86, 0.12);
+  border: 1px solid rgba(228, 175, 86, 0.25);
   color: var(--gold);
   font-size: 0.88rem;
   flex-shrink: 0;
-  box-shadow: 0 0 8px rgba(228,175,86,0.12);
+  box-shadow: 0 0 8px rgba(228, 175, 86, 0.12);
 }
 
 .gem-cta {
   box-shadow:
-    0 0 24px rgba(228,175,86,0.35),
-    0 0 60px rgba(228,175,86,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.18);
+    0 0 24px rgba(228, 175, 86, 0.35),
+    0 0 60px rgba(228, 175, 86, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
   transition: box-shadow 220ms ease, transform 180ms ease;
 }
 
 .gem-cta:hover {
   box-shadow:
-    0 0 36px rgba(228,175,86,0.55),
-    0 0 80px rgba(228,175,86,0.2),
-    inset 0 1px 0 rgba(255,255,255,0.22);
+    0 0 36px rgba(228, 175, 86, 0.55),
+    0 0 80px rgba(228, 175, 86, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
   transform: translateY(-3px);
 }
 
-/* RIGHT column: planetary diagram */
-.gem-diagram-col {
+/* RIGHT column: B&W image panel */
+.gem-image-panel {
+  width: 100%;
   position: relative;
-  aspect-ratio: 1 / 1;
-  min-height: 460px;
-  max-width: 540px;
-  margin: 0 auto;
+  z-index: 2;
 }
 
-/* Central golden glow behind orbits */
-.gem-center-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(228,175,86,0.18) 0%, transparent 70%);
-  filter: blur(18px);
-  pointer-events: none;
-  z-index: 1;
+.gem-image-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(228, 175, 86, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(228, 175, 86, 0.08),
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(228, 175, 86, 0.06);
 }
 
-/* Full-size orbit SVG fills the column */
-.gem-orbit-svg {
+.gem-bg-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.12) brightness(0.72);
+}
+
+.gem-img-overlay-svg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
   z-index: 2;
 }
 
-/* Individual gemstone planet slots */
-.gem-planet {
+.gem-image-frame::after {
+  content: "";
   position: absolute;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  transform: translate(-50%, -50%);
-}
-
-/* Gemstone image */
-.gem-planet-img {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  border-radius: 50%;
-  filter: drop-shadow(0 0 14px currentColor);
-  animation: gemFloat 5s ease-in-out infinite;
-  position: relative;
-  z-index: 3;
-}
-
-.gem-ruby .gem-planet-img {
-  filter: drop-shadow(0 0 16px rgba(220,60,60,0.8)) drop-shadow(0 0 6px rgba(255,120,80,0.6));
-  animation-delay: 0s;
-}
-.gem-emerald .gem-planet-img {
-  filter: drop-shadow(0 0 16px rgba(40,200,100,0.8)) drop-shadow(0 0 6px rgba(80,255,140,0.55));
-  animation-delay: -1.7s;
-}
-.gem-sapphire .gem-planet-img {
-  filter: drop-shadow(0 0 16px rgba(60,100,240,0.8)) drop-shadow(0 0 6px rgba(100,160,255,0.55));
-  animation-delay: -3.3s;
-}
-
-@keyframes gemFloat {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
-}
-
-/* Glow disc behind each gem */
-.gem-planet-glow {
-  position: absolute;
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  filter: blur(16px);
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.32) 0%,
+      transparent 30%,
+      transparent 55%,
+      rgba(0, 0, 0, 0.72) 100%
+    );
+  z-index: 1;
   pointer-events: none;
 }
 
-.gem-ruby-glow    { background: radial-gradient(circle, rgba(220,60,60,0.5), transparent 70%); }
-.gem-emerald-glow { background: radial-gradient(circle, rgba(40,200,100,0.5), transparent 70%); }
-.gem-sapphire-glow{ background: radial-gradient(circle, rgba(60,100,240,0.5), transparent 70%); }
-
-/* Glassmorphism label cards */
-.gem-label-card {
-  display: flex;
-  flex-direction: column;
+.gem-img-badge {
+  position: absolute;
+  top: 1.1rem;
+  left: 1.1rem;
+  z-index: 4;
+  display: inline-flex;
   align-items: center;
-  gap: 0.15rem;
-  padding: 0.45rem 0.9rem 0.5rem;
-  border-radius: 14px;
-  background: rgba(10,8,5,0.72);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(228,175,86,0.22);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.45), 0 0 12px rgba(228,175,86,0.07);
-  white-space: nowrap;
-  position: relative;
-  z-index: 6;
-}
-
-.gem-label-ruby    { border-color: rgba(220,60,60,0.35);  box-shadow: 0 4px 20px rgba(220,60,60,0.15); }
-.gem-label-emerald { border-color: rgba(40,200,100,0.35); box-shadow: 0 4px 20px rgba(40,200,100,0.15); }
-.gem-label-sapphire{ border-color: rgba(60,100,240,0.35); box-shadow: 0 4px 20px rgba(60,100,240,0.15); }
-
-.gem-label-planet {
-  font-size: 0.68rem;
+  gap: 0.45rem;
+  padding: 0.42rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(10, 8, 4, 0.72);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(228, 175, 86, 0.35);
   color: var(--gold);
-  letter-spacing: 0.15em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  box-shadow: 0 0 16px rgba(228, 175, 86, 0.15);
 }
 
-.gem-label-card strong {
+.gem-img-badge span {
+  font-size: 0.6rem;
+  opacity: 0.85;
+}
+
+.gem-img-chips {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 4;
+  display: flex;
+  gap: 0.65rem;
+}
+
+.gem-chip {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 14px;
+  background: rgba(8, 6, 4, 0.78);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(228, 175, 86, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.gem-chip-ruby {
+  border-color: rgba(220, 60, 60, 0.35);
+}
+.gem-chip-emerald {
+  border-color: rgba(40, 200, 100, 0.35);
+}
+.gem-chip-sapphire {
+  border-color: rgba(60, 100, 240, 0.35);
+}
+
+.gem-chip-symbol {
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.gem-chip-ruby .gem-chip-symbol {
+  color: #e06060;
+}
+.gem-chip-emerald .gem-chip-symbol {
+  color: #50d080;
+}
+.gem-chip-sapphire .gem-chip-symbol {
+  color: #6090f8;
+}
+
+.gem-chip strong {
+  display: block;
   font-family: var(--font-cinzel), serif;
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   color: var(--white);
+  line-height: 1.2;
 }
 
-.gem-label-card em {
+.gem-chip em {
+  display: block;
   font-style: normal;
-  font-size: 0.65rem;
-  color: rgba(255,255,255,0.45);
-  letter-spacing: 0.1em;
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.08em;
+  margin-top: 0.15rem;
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .gem-two-col {
     grid-template-columns: 1fr;
@@ -2963,155 +3585,6 @@ ul {
     transform: translate(50%, -50%);
     opacity: 0.3;
   }
-  .gem-diagram-col {
-    min-height: 380px;
-    max-width: 420px;
-  }
-  .gem-planet-img {
-    width: 58px;
-    height: 58px;
-  }
-}
-
-/* ─── GEM IMAGE PANEL (Right Column B&W) ─── */
-
-.gem-image-panel {
-  width: 100%;
-  position: relative;
-  z-index: 2;
-}
-
-.gem-image-frame {
-  position: relative;
-  width: 100%;
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid rgba(228,175,86,0.2);
-  box-shadow:
-    0 0 0 1px rgba(228,175,86,0.08),
-    0 30px 80px rgba(0,0,0,0.55),
-    0 0 60px rgba(228,175,86,0.06);
-}
-
-/* The B&W background image */
-.gem-bg-img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 420px;
-  object-fit: cover;
-  filter: grayscale(1) contrast(1.12) brightness(0.72);
-}
-
-/* Gold sacred geometry SVG sits on top of the image */
-.gem-img-overlay-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Gradient overlay so chips are legible */
-.gem-image-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg,
-      rgba(0,0,0,0.32) 0%,
-      transparent 30%,
-      transparent 55%,
-      rgba(0,0,0,0.72) 100%
-    );
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Top-left "Certified & Authentic" badge */
-.gem-img-badge {
-  position: absolute;
-  top: 1.1rem;
-  left: 1.1rem;
-  z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.42rem 0.9rem;
-  border-radius: 999px;
-  background: rgba(10,8,4,0.72);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(228,175,86,0.35);
-  color: var(--gold);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  box-shadow: 0 0 16px rgba(228,175,86,0.15);
-}
-
-.gem-img-badge span {
-  font-size: 0.6rem;
-  opacity: 0.85;
-}
-
-/* Bottom row of 3 gemstone chips */
-.gem-img-chips {
-  position: absolute;
-  bottom: 1.2rem;
-  left: 1rem;
-  right: 1rem;
-  z-index: 4;
-  display: flex;
-  gap: 0.65rem;
-}
-
-.gem-chip {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.6rem 0.8rem;
-  border-radius: 14px;
-  background: rgba(8,6,4,0.78);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(228,175,86,0.2);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-}
-
-.gem-chip-ruby    { border-color: rgba(220,60,60,0.35);  }
-.gem-chip-emerald { border-color: rgba(40,200,100,0.35); }
-.gem-chip-sapphire{ border-color: rgba(60,100,240,0.35); }
-
-.gem-chip-symbol {
-  font-size: 1.1rem;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.gem-chip-ruby    .gem-chip-symbol { color: #e06060; }
-.gem-chip-emerald .gem-chip-symbol { color: #50d080; }
-.gem-chip-sapphire .gem-chip-symbol{ color: #6090f8; }
-
-.gem-chip strong {
-  display: block;
-  font-family: var(--font-cinzel), serif;
-  font-size: 0.74rem;
-  color: var(--white);
-  line-height: 1.2;
-}
-
-.gem-chip em {
-  display: block;
-  font-style: normal;
-  font-size: 0.62rem;
-  color: rgba(255,255,255,0.45);
-  letter-spacing: 0.08em;
-  margin-top: 0.15rem;
-}
-
-@media (max-width: 900px) {
   .gem-image-frame {
     border-radius: 18px;
   }
@@ -3124,6 +3597,847 @@ ul {
     left: 0.8rem;
     right: 0.8rem;
     gap: 0.45rem;
+  }
+}
+
+/* ─── GEMSTONE MARKETPLACE: LUXE COSMIC EXPERIENCE (Dedicated Page) ─── */
+
+.gem-marketplace-section {
+  position: relative;
+  padding: 7rem 2rem 7.5rem;
+  background: radial-gradient(circle at 15% 0%, rgba(251, 191, 36, 0.08), transparent 50%),
+    radial-gradient(circle at 85% 20%, rgba(168, 85, 247, 0.18), transparent 55%),
+    linear-gradient(180deg, #020617 0%, #0f172a 45%, #020617 100%);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.gem-marketplace-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gem-marketplace-stars {
+  position: absolute;
+  inset: 0;
+  opacity: 0.9;
+  mix-blend-mode: screen;
+}
+
+.gem-marketplace-stars-back {
+  background-image:
+    radial-gradient(circle, rgba(248, 250, 252, 0.7) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(148, 163, 184, 0.55) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle, rgba(148, 163, 184, 0.4) 0 1px, transparent 2px);
+  background-size: 200px 200px, 280px 280px, 360px 360px;
+  background-position: 0 0, 80px 60px, 40px 120px;
+  filter: blur(0.3px);
+}
+
+.gem-marketplace-stars-front {
+  background-image:
+    radial-gradient(circle, rgba(248, 250, 252, 0.9) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(165, 180, 252, 0.7) 0 1.4px, transparent 2.4px);
+  background-size: 320px 320px, 220px 220px;
+  background-position: 0 0, 100px 140px;
+  opacity: 0.7;
+}
+
+.gem-marketplace-nebula {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  max-width: 780px;
+  max-height: 780px;
+  border-radius: 999px;
+  filter: blur(40px);
+  opacity: 0.75;
+  mix-blend-mode: screen;
+}
+
+.gem-marketplace-nebula-left {
+  left: -18%;
+  top: 8%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.6), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgba(168, 85, 247, 0.45), transparent 60%);
+}
+
+.gem-marketplace-nebula-right {
+  right: -22%;
+  top: 16%;
+  background:
+    radial-gradient(circle at 40% 30%, rgba(251, 191, 36, 0.5), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgba(15, 23, 42, 0.9), transparent 60%);
+}
+
+.gem-marketplace-orbit-ring {
+  position: absolute;
+  left: 50%;
+  top: 14%;
+  width: 720px;
+  max-width: 80vw;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow:
+    0 0 50px rgba(15, 23, 42, 0.9),
+    0 0 160px rgba(79, 70, 229, 0.6);
+  opacity: 0.46;
+}
+
+.gem-marketplace-orbit-core {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  width: 340px;
+  max-width: 52vw;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(251, 191, 36, 0.6), transparent 65%),
+    radial-gradient(circle at 50% 70%, rgba(129, 140, 248, 0.3), transparent 70%);
+  filter: blur(48px);
+  opacity: 0.75;
+}
+
+.gem-marketplace-particles {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 12% 24%, rgba(251, 191, 36, 0.7) 0 1.1px, transparent 2.4px),
+    radial-gradient(circle at 28% 56%, rgba(196, 181, 253, 0.85) 0 1.2px, transparent 2.6px),
+    radial-gradient(circle at 78% 34%, rgba(251, 191, 36, 0.8) 0 1.4px, transparent 2.8px),
+    radial-gradient(circle at 64% 72%, rgba(129, 140, 248, 0.8) 0 1.1px, transparent 2.4px);
+  opacity: 0.75;
+  mix-blend-mode: screen;
+}
+
+.gem-marketplace-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.gem-marketplace-header {
+  max-width: 780px;
+  margin: 0 auto 2.75rem;
+  text-align: center;
+}
+
+.gem-heading {
+  color: #fbbf24;
+  text-shadow:
+    0 0 28px rgba(251, 191, 36, 0.45),
+    0 14px 40px rgba(0, 0, 0, 0.6);
+  font-size: clamp(2.3rem, 4vw, 3.3rem);
+}
+
+.gem-kicker {
+  color: rgba(249, 250, 251, 0.8);
+}
+
+.gem-subheading {
+  margin: 1.25rem auto 0;
+  max-width: 640px;
+  color: rgba(226, 232, 240, 0.85);
+  line-height: 1.8;
+  font-size: 1.02rem;
+}
+
+/* Recommendation widget */
+.gem-widget {
+  margin: 0 auto 3.5rem;
+  max-width: 980px;
+  border-radius: 24px;
+  padding: 1.9rem 2rem 1.9rem;
+  background:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.92)),
+    radial-gradient(circle at 0% 0%, rgba(251, 191, 36, 0.26), transparent 55%),
+    radial-gradient(circle at 100% 0%, rgba(129, 140, 248, 0.32), transparent 60%);
+  border: 1px solid rgba(148, 163, 184, 0.48);
+  box-shadow:
+    0 24px 80px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(248, 250, 252, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.gem-widget-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.45rem;
+}
+
+.gem-widget-kicker {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(248, 250, 252, 0.85);
+}
+
+.gem-widget-title {
+  margin: 0;
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.5rem;
+  color: #e5e7eb;
+}
+
+.gem-widget-subtitle {
+  margin: 0;
+  color: rgba(203, 213, 225, 0.9);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.gem-widget-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gem-widget-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.gem-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.gem-field span {
+  font-size: 0.86rem;
+  color: rgba(226, 232, 240, 0.95);
+}
+
+.gem-field input {
+  border-radius: 14px;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: radial-gradient(circle at 0% 0%, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+  color: #e5e7eb;
+}
+
+.gem-field input::placeholder {
+  color: rgba(148, 163, 184, 0.7);
+}
+
+.gem-field input:focus {
+  outline: none;
+  border-color: rgba(251, 191, 36, 0.95);
+  box-shadow:
+    0 0 0 1px rgba(251, 191, 36, 0.75),
+    0 0 24px rgba(251, 191, 36, 0.4);
+}
+
+.gem-widget-cta {
+  margin-top: 0.4rem;
+  align-self: flex-start;
+  border-radius: 999px;
+  padding: 0.9rem 1.9rem;
+  border: 0;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: #020617;
+  background: linear-gradient(135deg, #fbbf24, #facc15);
+  box-shadow:
+    0 0 30px rgba(251, 191, 36, 0.6),
+    0 0 80px rgba(251, 191, 36, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.gem-widget-cta:hover {
+  transform: translateY(-2px);
+}
+
+.gem-widget-result {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.gem-widget-result-label {
+  margin: 0 0 0.4rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(203, 213, 225, 0.85);
+}
+
+.gem-widget-result-main {
+  margin: 0;
+  font-size: 1.15rem;
+  font-family: var(--font-cinzel), serif;
+  color: #e5e7eb;
+}
+
+.gem-widget-result-main span {
+  font-size: 0.88rem;
+  margin-left: 0.35rem;
+  color: rgba(250, 204, 21, 0.9);
+}
+
+.gem-widget-result-description {
+  margin: 0.4rem 0 0;
+  font-size: 0.94rem;
+  color: rgba(203, 213, 225, 0.92);
+}
+
+.gem-widget-placeholder {
+  margin: 0;
+  font-size: 0.88rem;
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.gem-widget-placeholder strong {
+  color: rgba(250, 204, 21, 0.95);
+}
+
+/* Gem grid */
+.gem-grid-section {
+  margin-top: 2.8rem;
+}
+
+.gem-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.gem-card {
+  position: relative;
+  border-radius: 20px;
+  background: radial-gradient(circle at 0% 0%, rgba(129, 140, 248, 0.2), transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(251, 191, 36, 0.18), transparent 60%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  box-shadow:
+    0 24px 70px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.95) inset;
+  overflow: hidden;
+  backdrop-filter: blur(18px);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    filter 220ms ease;
+}
+
+.gem-card-media {
+  position: relative;
+  padding: 1.15rem 1.15rem 0.9rem;
+}
+
+.gem-card-image {
+  position: relative;
+  border-radius: 18px;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(0.25) contrast(1.1) brightness(1);
+  overflow: hidden;
+}
+
+.gem-card-orbit {
+  position: absolute;
+  inset: 1.4rem 1.5rem auto 1.5rem;
+  height: 120px;
+  border-radius: 999px;
+  border: 1px dashed rgba(148, 163, 184, 0.6);
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
+  mix-blend-mode: screen;
+  opacity: 0.75;
+}
+
+.gem-auth-badge {
+  position: absolute;
+  left: 1.7rem;
+  top: 1.7rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(250, 204, 21, 0.9);
+  color: rgba(250, 250, 249, 0.96);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 18px rgba(250, 204, 21, 0.6),
+    0 12px 30px rgba(15, 23, 42, 1);
+}
+
+.gem-card-body {
+  padding: 1.15rem 1.3rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.gem-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.gem-card-title {
+  margin: 0;
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.05rem;
+  color: #e5e7eb;
+}
+
+.gem-card-planet {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(191, 219, 254, 0.9);
+}
+
+.gem-card-benefits {
+  margin: 0.4rem 0 0.35rem;
+  font-size: 0.86rem;
+  line-height: 1.7;
+  color: rgba(203, 213, 225, 0.96);
+}
+
+.gem-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.2rem;
+  font-size: 0.78rem;
+}
+
+.gem-card-price {
+  color: #fbbf24;
+}
+
+.gem-card-cert {
+  color: rgba(148, 163, 184, 0.95);
+  text-align: right;
+}
+
+.gem-card-actions {
+  margin-top: 0.7rem;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.gem-btn {
+  flex: 1;
+  border-radius: 999px;
+  padding: 0.6rem 0.3rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.gem-btn-primary {
+  background: linear-gradient(135deg, #fbbf24, #facc15);
+  color: #020617;
+  box-shadow: 0 0 22px rgba(250, 204, 21, 0.5);
+}
+
+.gem-btn-secondary {
+  background: rgba(15, 23, 42, 0.85);
+  color: rgba(226, 232, 240, 0.98);
+  border-color: rgba(148, 163, 184, 0.8);
+}
+
+.gem-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(250, 204, 21, 0.9);
+  box-shadow:
+    0 30px 90px rgba(15, 23, 42, 1),
+    0 0 40px rgba(129, 140, 248, 0.4),
+    0 0 70px rgba(250, 204, 21, 0.3);
+  filter: saturate(1.12);
+}
+
+/* Trust strip */
+.gem-trust-strip {
+  margin-top: 3rem;
+  padding: 1.3rem 1.6rem;
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.92));
+  box-shadow:
+    0 22px 50px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.95) inset;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.gem-trust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.gem-trust-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 30% 30%, rgba(251, 191, 36, 0.3), transparent 70%);
+  border: 1px solid rgba(250, 204, 21, 0.85);
+  color: #fbbf24;
+  font-size: 0.95rem;
+  box-shadow: 0 0 18px rgba(250, 204, 21, 0.4);
+}
+
+.gem-trust-title {
+  margin: 0 0 0.2rem;
+  font-size: 0.9rem;
+  color: #e5e7eb;
+}
+
+.gem-trust-text {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(148, 163, 184, 0.96);
+}
+
+/* Spotlight card */
+.gem-spotlight {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.5fr);
+  gap: 2rem;
+  align-items: stretch;
+  border-radius: 24px;
+  border: 1px solid rgba(250, 204, 21, 0.8);
+  background: radial-gradient(circle at 0% 0%, rgba(248, 250, 252, 0.1), transparent 50%),
+    linear-gradient(120deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+  box-shadow:
+    0 26px 90px rgba(15, 23, 42, 1),
+    0 0 0 1px rgba(30, 64, 175, 0.8);
+  overflow: hidden;
+}
+
+.gem-spotlight-media {
+  position: relative;
+  min-height: 260px;
+  background: radial-gradient(circle at 50% 15%, rgba(250, 204, 21, 0.7), transparent 55%),
+    radial-gradient(circle at 50% 80%, rgba(30, 64, 175, 0.7), transparent 70%);
+}
+
+.gem-spotlight-glow {
+  position: absolute;
+  inset: 16% 10%;
+  border-radius: 999px;
+  background: radial-gradient(circle at 50% 20%, rgba(250, 250, 249, 0.9), transparent 70%);
+  filter: blur(22px);
+}
+
+.gem-spotlight-ring {
+  position: absolute;
+  inset: 20% 18%;
+  border-radius: 999px;
+  border: 1px solid rgba(250, 250, 249, 0.9);
+  opacity: 0.75;
+}
+
+.gem-spotlight-ring-outer {
+  inset: 14% 14%;
+}
+
+.gem-spotlight-ring-inner {
+  inset: 28% 26%;
+}
+
+.gem-spotlight-orb {
+  position: absolute;
+  inset: 34% 34%;
+  border-radius: 999px;
+  background: radial-gradient(circle at 50% 25%, rgba(248, 250, 252, 0.95), rgba(30, 64, 175, 0.8));
+  box-shadow:
+    0 0 40px rgba(248, 250, 252, 0.9),
+    0 0 110px rgba(37, 99, 235, 0.9);
+}
+
+.gem-spotlight-copy {
+  padding: 1.8rem 2rem 1.8rem 1.8rem;
+}
+
+.gem-spotlight-kicker {
+  margin: 0 0 0.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250, 204, 21, 0.95);
+}
+
+.gem-spotlight-title {
+  margin: 0;
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.4rem;
+  color: #f9fafb;
+}
+
+.gem-spotlight-text {
+  margin: 0.9rem 0 0.9rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(226, 232, 240, 0.96);
+}
+
+.gem-spotlight-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: rgba(226, 232, 240, 0.96);
+}
+
+.gem-spotlight-list li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.gem-spotlight-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(250, 204, 21, 1), rgba(250, 204, 21, 0.1));
+}
+
+.gem-spotlight-cta {
+  margin-top: 1.2rem;
+  border-radius: 999px;
+  padding: 0.85rem 1.6rem;
+  border: 0;
+  background: linear-gradient(135deg, #fbbf24, #f97316);
+  color: #020617;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow:
+    0 0 32px rgba(251, 191, 36, 0.7),
+    0 0 90px rgba(251, 191, 36, 0.25);
+}
+
+/* Steps */
+.gem-steps {
+  margin-top: 3.5rem;
+}
+
+.gem-steps-heading {
+  margin: 0 0 1.6rem;
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.5rem;
+  color: #e5e7eb;
+}
+
+.gem-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.gem-step {
+  border-radius: 20px;
+  padding: 1.3rem 1.2rem 1.35rem;
+  background: linear-gradient(150deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+  border: 1px solid rgba(148, 163, 184, 0.85);
+  box-shadow:
+    0 18px 50px rgba(15, 23, 42, 1),
+    0 0 0 1px rgba(15, 23, 42, 1) inset;
+}
+
+.gem-step-number {
+  font-size: 0.82rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(129, 140, 248, 0.9);
+  margin-bottom: 0.4rem;
+}
+
+.gem-step-title {
+  margin: 0;
+  font-size: 1rem;
+  color: #e5e7eb;
+}
+
+.gem-step-text {
+  margin: 0.7rem 0 0;
+  font-size: 0.9rem;
+  color: rgba(203, 213, 225, 0.98);
+  line-height: 1.8;
+}
+
+/* Luxury CTA */
+.gem-luxury-cta {
+  margin-top: 3.8rem;
+}
+
+.gem-luxury-cta-inner {
+  position: relative;
+  border-radius: 24px;
+  padding: 1.8rem 1.9rem;
+  background:
+    radial-gradient(circle at 0% 50%, rgba(248, 250, 252, 0.16), transparent 65%),
+    radial-gradient(circle at 100% 50%, rgba(251, 191, 36, 0.28), transparent 65%),
+    linear-gradient(110deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.99));
+  border: 1px solid rgba(250, 250, 249, 0.8);
+  box-shadow:
+    0 32px 100px rgba(15, 23, 42, 1),
+    0 0 0 1px rgba(15, 23, 42, 1) inset;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+
+.gem-luxury-copy {
+  max-width: 640px;
+}
+
+.gem-luxury-kicker {
+  margin: 0 0 0.6rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.96);
+}
+
+.gem-luxury-title {
+  margin: 0;
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: #f9fafb;
+}
+
+.gem-luxury-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.gem-luxury-btn {
+  border-radius: 999px;
+  padding: 0.85rem 1.4rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.gem-luxury-btn-primary {
+  background: linear-gradient(135deg, #fbbf24, #f97316);
+  color: #020617;
+  box-shadow:
+    0 0 28px rgba(251, 191, 36, 0.6),
+    0 0 90px rgba(251, 191, 36, 0.25);
+}
+
+.gem-luxury-btn-secondary {
+  background: rgba(15, 23, 42, 1);
+  color: rgba(226, 232, 240, 0.98);
+  border-color: rgba(148, 163, 184, 0.9);
+}
+
+/* Responsive layout */
+@media (max-width: 1180px) {
+  .gem-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .gem-widget-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gem-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gem-trust-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gem-spotlight {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .gem-marketplace-section {
+    padding: 5rem 1.3rem 5.8rem;
+  }
+
+  .gem-marketplace-header {
+    margin-bottom: 2.1rem;
+  }
+
+  .gem-widget {
+    padding: 1.5rem 1.4rem;
+  }
+
+  .gem-widget-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gem-widget-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .gem-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gem-trust-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .gem-steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gem-luxury-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gem-luxury-actions {
+    width: 100%;
+  }
+
+  .gem-luxury-btn {
+    flex: 1 1 auto;
+    text-align: center;
+    justify-content: center;
   }
 }
 

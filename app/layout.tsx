@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Cinzel, Jost } from "next/font/google";
 import "./globals.css";
+import SiteFooter from "./components/SiteFooter";
+import SiteHeader from "./components/SiteHeader";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -26,7 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${cinzel.variable} ${jost.variable}`}>{children}</body>
+      <body className={`${cinzel.variable} ${jost.variable}`}>
+        <div className="page-shell">
+          <SiteHeader />
+          <main>{children}</main>
+          <SiteFooter />
+        </div>
+      </body>
     </html>
   );
 }

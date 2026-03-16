@@ -1,12 +1,13 @@
 const navItems = [
   "Home",
-  "Astrology",
-  "Attend",
-  "Magic",
-  "Events",
-  "Tarotscopes",
-  "Pages",
-  "Contact",
+  "Consult Experts",
+  "Services",
+  "Gemstones",
+  "Academy",
+  "Horoscope",
+  "Tools",
+  "Blog",
+  "Membership",
 ];
 
 const trustItems = [
@@ -459,33 +460,8 @@ const footerColumns = [
 
 export default function Home() {
   return (
-    <div className="page-shell">
-      <header className="site-header">
-        <nav className="nav-bar">
-          {navItems.slice(0, 4).map((item) => (
-            <a
-              key={item}
-              href="#"
-              className={`nav-link ${item === "Home" ? "active" : ""}`}
-            >
-              {item}
-            </a>
-          ))}
-
-          <a href="#" className="brand-mark">
-            VedAstraa
-          </a>
-
-          {navItems.slice(4).map((item) => (
-            <a key={item} href="#" className="nav-link">
-              {item}
-            </a>
-          ))}
-        </nav>
-      </header>
-
-      <main>
-        <section className="hero-section">
+    <>
+      <section className="hero-section">
           <div className="hero-vignette" />
           <div className="starfield starfield-back" />
           <div className="starfield starfield-front" />
@@ -544,7 +520,7 @@ export default function Home() {
 
         </section>
         
-        <section className="trust-section">
+      <section className="trust-section">
           <div className="section-shell">
             <p className="trust-heading">
               Trusted by thousands seeking clarity and spiritual guidance
@@ -570,7 +546,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="services-section">
+      <section className="services-section">
           <div className="services-atmosphere" aria-hidden="true">
             <span className="services-cloudscape" />
           </div>
@@ -606,7 +582,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="experts-section">
+      <section className="experts-section" id="consult-experts">
           <div className="section-shell experts-shell">
             <div className="experts-showcase">
               <div className="experts-visual" aria-hidden="true">
@@ -656,7 +632,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="gemstones-section">
+      <section className="gemstones-section">
           {/* Sacred geometry background */}
           <div className="gem-bg" aria-hidden="true">
             <svg className="gem-sacred-geo" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -736,7 +712,7 @@ export default function Home() {
             <div className="gem-image-panel" aria-label="Gemstone astrology visual">
               <div className="gem-image-frame">
                 <img src="/gemstone-bg.png" alt="Luxury gemstones on Vedic astrology chart" className="gem-bg-img"/>
-
+              
                 {/* Gold sacred geometry SVG overlay on image */}
                 <svg className="gem-img-overlay-svg" viewBox="0 0 600 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <circle cx="300" cy="210" r="160" stroke="rgba(228,175,86,0.22)" strokeWidth="1" strokeDasharray="5 10"/>
@@ -789,7 +765,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="dashboard-section">
+      <section className="dashboard-section">
           <div className="section-shell split-panel dashboard-panel">
             <div className="dashboard-visual">
               <div className="dashboard-card main-dashboard-card">
@@ -822,7 +798,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="academy-section">
+      <section className="academy-section">
           <div className="section-shell academy-shell">
             <div className="academy-ornament academy-ornament-left" aria-hidden="true" />
             <div className="academy-ornament academy-ornament-right" aria-hidden="true" />
@@ -904,7 +880,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="tools-section">
+      <section className="tools-section" id="tools">
           <div className="section-shell">
             <p className="section-kicker">Astrology Tools</p>
             <h2 className="section-title">Free Astrology Tools</h2>
@@ -925,7 +901,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="horoscope-section">
+      <section className="horoscope-section" id="horoscope">
           <div className="section-shell">
             <div className="horoscope-layout">
               <div className="zodiac-grid">
@@ -952,7 +928,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="why-section">
+      <section className="why-section">
           <div className="section-shell">
             <p className="section-kicker">Why Choose VedAstraa</p>
             <h2 className="section-title">Why Thousands Trust VedAstraa</h2>
@@ -977,7 +953,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="testimonials-section">
+      <section className="testimonials-section">
           <div className="section-shell">
             <p className="section-kicker">Testimonials</p>
             <h2 className="section-title">What Our Users Say</h2>
@@ -995,7 +971,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="how-section">
+      <section className="how-section">
           <div className="section-shell">
             <p className="section-kicker">How VedAstraa Works</p>
             <h2 className="section-title">A Clear Path to Spiritual Guidance</h2>
@@ -1018,7 +994,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="cta-section">
+      <section className="cta-section">
           <div className="section-shell cta-shell">
             <p className="section-kicker">Call To Action</p>
             <h2 className="section-title">Start Your Spiritual Journey Today</h2>
@@ -1035,26 +1011,8 @@ export default function Home() {
               </a>
             </div>
           </div>
-        </section>
-      </main>
-
-      <footer className="site-footer">
-        <div className="footer-shell">
-          {footerColumns.map((column) => (
-            <div key={column.title} className="footer-column">
-              <h3>{column.title}</h3>
-              <ul>
-                {column.links.map((link) => (
-                  <li key={link}>
-                    <a href="#">{link}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </footer>
-    </div>
+      </section>
+    </>
   );
 }
 
