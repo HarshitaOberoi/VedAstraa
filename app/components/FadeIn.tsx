@@ -5,7 +5,7 @@ import * as React from "react";
 type FadeInProps = {
   children: React.ReactNode;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof HTMLElementTagNameMap;
   once?: boolean;
   threshold?: number;
 };
@@ -17,7 +17,7 @@ export default function FadeIn({
   once = true,
   threshold = 0.2,
 }: FadeInProps) {
-  const Tag = (as ?? "div") as keyof JSX.IntrinsicElements;
+  const Tag = as ?? "div";
   const ref = React.useRef<HTMLElement | null>(null);
   const [visible, setVisible] = React.useState(false);
 
@@ -42,16 +42,14 @@ export default function FadeIn({
     return () => observer.disconnect();
   }, [once, threshold]);
 
-  return (
-    <Tag
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ref={ref as any}
-      data-fadein="true"
-      data-visible={visible ? "true" : "false"}
-      className={className}
-    >
-      {children}
-    </Tag>
+  return React.createElement(
+    Tag,
+    {
+      ref: ref as React.Ref<HTMLElement>,
+      "data-fadein": "true",
+      "data-visible": visible ? "true" : "false",
+      className,
+    },
+    children
   );
 }
-
