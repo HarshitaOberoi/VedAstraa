@@ -179,66 +179,54 @@ const zodiacSigns = [
 
 const zodiacIconPaths: Record<string, string[]> = {
   aries: [
-    "M12 5a5 5 0 1 0 -4 8",
-    "M16 13a5 5 0 1 0 -4 -8",
-    "M12 21l0 -16",
+    "M12 21c0-4 0-8 0-8 0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6M12 13c0-3.3-2.7-6-6-6s-6 2.7-6 6 2.7 6 6 6",
   ],
   taurus: [
-    "M6 3a6 6 0 0 0 12 0",
-    "M6 15a6 6 0 1 0 12 0a6 6 0 1 0 -12 0",
+    "M12 21a6 6 0 1 0 0-12 6 6 0 0 0 0 12z",
+    "M6 4a6 6 0 0 1 12 0",
   ],
   gemini: [
-    "M3 3a21 21 0 0 0 18 0",
-    "M3 21a21 21 0 0 1 18 0",
-    "M7 4.5l0 15",
-    "M17 4.5l0 15",
+    "M8 4.5v15",
+    "M16 4.5v15",
+    "M3 3.5c6 1.5 12 1.5 18 0",
+    "M3 20.5c6-1.5 12-1.5 18 0",
   ],
   cancer: [
-    "M3 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0",
-    "M15 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0",
-    "M3 12a10 6.5 0 0 1 14 -6.5",
-    "M21 12a10 6.5 0 0 1 -14 6.5",
+    "M6 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+    "M18 12a3 3 0 1 0 0 6 3 3 0 0 0 0-6z",
+    "M18 12a9 6 0 0 0-15-5",
+    "M6 12a9 6 0 0 0 15 5",
   ],
   leo: [
-    "M13 17a4 4 0 1 0 8 0",
-    "M3 16a3 3 0 1 0 6 0a3 3 0 1 0 -6 0",
-    "M7 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0",
-    "M7 7c0 3 2 5 2 9",
-    "M15 7c0 4 -2 6 -2 10",
+    "M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+    "M15.5 10c1-2 4-2 4 2 0 3-2 5-2 9",
   ],
   virgo: [
-    "M3 4a2 2 0 0 1 2 2v9",
-    "M5 6a2 2 0 0 1 4 0v9",
-    "M9 6a2 2 0 0 1 4 0v10a7 5 0 0 0 7 5",
-    "M12 21a7 5 0 0 0 7 -5v-2a3 3 0 0 0 -6 0",
+    "M4 5v10c0 1 1 2 2 2s2-1 2-2V5c0 1 1 2 2 2s2-1 2-2v10c0 1 1 2 2 2s2-1 2-2V9c0-2 3-2 3 0v5c0 3-2 5-5 5",
   ],
   libra: [
-    "M5 20l14 0",
-    "M5 17h5v-.3a7 7 0 1 1 4 0v.3h5",
+    "M4 21h16",
+    "M4 18h5a3 3 0 0 1 6 0h5",
   ],
   scorpio: [
-    "M3 4a2 2 0 0 1 2 2v9",
-    "M5 6a2 2 0 0 1 4 0v9",
-    "M9 6a2 2 0 0 1 4 0v10a3 3 0 0 0 3 3h5l-3 -3m0 6l3 -3",
+    "M4 5v10c0 1 1 2 2 2s2-1 2-2V5c0 1 1 2 2 2s2-1 2-2v10c0 1 1 2 2 2s2-1 2-2v4l3-3m-3 3l-3-3",
   ],
   sagittarius: [
-    "M4 20l16 -16",
-    "M13 4h7v7",
-    "M6.5 12.5l5 5",
+    "M5 19l14-14",
+    "M12 5h7v7",
+    "M7 12l5 5",
   ],
   capricorn: [
-    "M4 4a3 3 0 0 1 3 3v9",
-    "M7 7a3 3 0 0 1 6 0v11a3 3 0 0 1 -3 3",
-    "M13 17a3 3 0 1 0 6 0a3 3 0 1 0 -6 0",
+    "M4 5v12c0 1 1 2 2 2s2-1 2-2V5l4 14c1 2 4 2 4 0 0-2-2-4-4-4",
   ],
   aquarius: [
-    "M3 10l3 -3l3 3l3 -3l3 3l3 -3l3 3",
-    "M3 17l3 -3l3 3l3 -3l3 3l3 -3l3 3",
+    "M4 9l3-3 3 3 3-3 3 3 3-3",
+    "M4 17l3-3 3 3 3-3 3 3 3-3",
   ],
   pisces: [
-    "M5 3a21 21 0 0 1 0 18",
-    "M19 3a21 21 0 0 0 0 18",
-    "M5 12l14 0",
+    "M5 4a14 14 0 0 1 0 16",
+    "M19 4a14 14 0 0 0 0 16",
+    "M4 12h16",
   ],
 };
 
@@ -586,8 +574,115 @@ export default function Home() {
           <div className="section-shell experts-shell">
             <div className="experts-showcase">
               <div className="experts-visual" aria-hidden="true">
-                <div className="experts-portrait" />
-                <div className="experts-candle" />
+                <div className="experts-portrait">
+                  <svg className="cosmic-expert-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+                        <feGaussianBlur stdDeviation="6" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                      </filter>
+                      <radialGradient id="zodiacGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stopColor="rgba(255, 255, 255, 0.15)" />
+                        <stop offset="70%" stopColor="rgba(251, 191, 36, 0.05)" />
+                        <stop offset="100%" stopColor="transparent" />
+                      </radialGradient>
+                    </defs>
+
+                    {/* Background Glow */}
+                    <circle cx="250" cy="250" r="240" fill="url(#zodiacGradient)" />
+
+                    {/* Rotating Zodiac Wheel Structure */}
+                    <g className="rotate-slow">
+                      {/* Outer double border with ticks */}
+                      <circle cx="250" cy="250" r="230" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1" />
+                      <circle cx="250" cy="250" r="222" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="0.5" />
+                      {Array.from({ length: 72 }).map((_, i) => (
+                        <line 
+                          key={`tick-${i}`}
+                          x1={250 + 222 * Math.cos(i * 5 * Math.PI / 180)}
+                          y1={250 + 222 * Math.sin(i * 5 * Math.PI / 180)}
+                          x2={250 + 230 * Math.cos(i * 5 * Math.PI / 180)}
+                          y2={250 + 230 * Math.sin(i * 5 * Math.PI / 180)}
+                          stroke="rgba(255, 255, 255, 0.3)"
+                          strokeWidth="0.5"
+                        />
+                      ))}
+
+                      {/* Zodiac Sections and Symbols */}
+                      {zodiacSigns.map((z, i) => {
+                        const angle = (i * 30 - 90) * Math.PI / 180;
+                        
+                        // Section dividers
+                        const x1 = 250 + 100 * Math.cos(angle);
+                        const y1 = 250 + 100 * Math.sin(angle);
+                        const x2 = 250 + 222 * Math.cos(angle);
+                        const y2 = 250 + 222 * Math.sin(angle);
+                        
+                        // Symbol and Label positions
+                        const sx = 250 + 155 * Math.cos(angle + 15 * Math.PI / 180);
+                        const sy = 250 + 155 * Math.sin(angle + 15 * Math.PI / 180);
+                        const lx = 250 + 205 * Math.cos(angle + 15 * Math.PI / 180);
+                        const ly = 250 + 205 * Math.sin(angle + 15 * Math.PI / 180);
+
+                        return (
+                          <g key={z.name}>
+                            <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
+                            
+                            {/* The Symbol Icon (using paths from zodiacIconPaths) */}
+                            <g 
+                              transform={`translate(${sx}, ${sy}) rotate(${i * 30}) scale(2) translate(-12, -12)`}
+                            >
+                              {zodiacIconPaths[z.icon].map((d, idx) => (
+                                <path 
+                                  key={`${z.name}-path-${idx}`} 
+                                  d={d} 
+                                  stroke="white" 
+                                  strokeWidth="1.5" 
+                                  fill="none" 
+                                  filter="url(#glow)"
+                                />
+                              ))}
+                            </g>
+
+                            <text 
+                              x={lx} y={ly} 
+                              textAnchor="middle" dominantBaseline="middle" 
+                              fontSize="9" fill="rgba(255, 255, 255, 0.75)" letterSpacing="1.2"
+                              style={{ transform: `rotate(${i * 30}deg)`, transformOrigin: `${lx}px ${ly}px` }}
+                            >
+                              {z.name.toUpperCase()}
+                            </text>
+                          </g>
+                        );
+                      })}
+
+                      {/* Inner Circles */}
+                      <circle cx="250" cy="250" r="100" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="1" />
+                      <circle cx="250" cy="250" r="92" stroke="rgba(255, 255, 255, 0.1)" strokeWidth="0.5" />
+                    </g>
+
+                    {/* Central Mystic Star (Metatron-inspired) */}
+                    <g className="rotate-med" filter="url(#glow)">
+                      <path 
+                        d="M250 150 L280 220 L350 220 L295 265 L315 335 L250 290 L185 335 L205 265 L150 220 L220 220 Z" 
+                        fill="none" stroke="rgba(251, 191, 36, 0.8)" strokeWidth="1.5"
+                      />
+                      <circle cx="250" cy="250" r="50" stroke="rgba(251, 191, 36, 0.4)" strokeWidth="1" />
+                      <circle cx="250" cy="250" r="5" fill="#fbbf24" />
+                      {Array.from({ length: 8 }).map((_, i) => {
+                        const a = i * 45 * Math.PI / 180;
+                        return (
+                          <line 
+                            key={`star-ray-${i}`}
+                            x1={250 + 5 * Math.cos(a)} y1={250 + 5 * Math.sin(a)}
+                            x2={250 + 45 * Math.cos(a)} y2={250 + 45 * Math.sin(a)}
+                            stroke="rgba(251, 191, 36, 0.6)" strokeWidth="1"
+                          />
+                        );
+                      })}
+                    </g>
+                  </svg>
+                </div>
               </div>
 
               <div className="experts-panel">

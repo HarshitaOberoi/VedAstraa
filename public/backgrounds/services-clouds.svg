@@ -1,5 +1,5 @@
 <svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1600" height="900" fill="#020202"/>
+  <rect width="1600" height="900" fill="#0b1f3b"/>
   <rect width="1600" height="900" fill="url(#voids)" opacity="0.65"/>
 
   <g filter="url(#cloudBlurHeavy)" opacity="0.95">
@@ -36,10 +36,10 @@
 
   <defs>
     <linearGradient id="voids" x1="800" y1="0" x2="800" y2="900" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#000000" stop-opacity="0.15"/>
-      <stop offset="0.38" stop-color="#000000" stop-opacity="0.02"/>
-      <stop offset="0.72" stop-color="#000000" stop-opacity="0.24"/>
-      <stop offset="1" stop-color="#000000" stop-opacity="0.4"/>
+  <stop stop-color="#0b1f3b" stop-opacity="0.15"/>
+  <stop offset="0.38" stop-color="#0b1f3b" stop-opacity="0.02"/>
+  <stop offset="0.72" stop-color="#0b1f3b" stop-opacity="0.24"/>
+  <stop offset="1" stop-color="#0b1f3b" stop-opacity="0.4"/>
     </linearGradient>
 
     <filter id="cloudBlurHeavy" x="-142" y="-73" width="1244" height="1069" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
