@@ -1,3 +1,7 @@
+"use client";
+
+import FadeIn from "./components/FadeIn";
+
 const navItems = [
   "Home",
   "Consult Experts",
@@ -510,25 +514,29 @@ export default function Home() {
         
       <section className="trust-section">
           <div className="section-shell">
-            <p className="trust-heading">
-              Trusted by thousands seeking clarity and spiritual guidance
-            </p>
+            <FadeIn>
+              <p className="trust-heading">
+                Trusted by thousands seeking clarity and spiritual guidance
+              </p>
+            </FadeIn>
             <div className="trust-grid">
               {trustItems.map((item) => (
-                <article key={item.title} className="trust-card">
-                  <div
-                    className="trust-card-bg"
-                    style={{ backgroundImage: `url(${item.image})` }}
-                    aria-hidden="true"
-                  />
-                  <div className="trust-card-content">
-                    <div className="trust-icon" aria-hidden="true">
-                      {item.icon}
+                <FadeIn key={item.title}>
+                  <article className="trust-card">
+                    <div
+                      className="trust-card-bg"
+                      style={{ backgroundImage: `url(${item.image})` }}
+                      aria-hidden="true"
+                    />
+                    <div className="trust-card-content">
+                      <div className="trust-icon" aria-hidden="true">
+                        {item.icon}
+                      </div>
+                      <h3>{item.title}</h3>
+                      <p>{item.description}</p>
                     </div>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </div>
-                </article>
+                  </article>
+                </FadeIn>
               ))}
             </div>
           </div>
@@ -582,8 +590,8 @@ export default function Home() {
                         <feComposite in="SourceGraphic" in2="blur" operator="over" />
                       </filter>
                       <radialGradient id="zodiacGradient" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stopColor="rgba(255, 255, 255, 0.15)" />
-                        <stop offset="70%" stopColor="rgba(251, 191, 36, 0.05)" />
+                        <stop offset="0%" stopColor="rgba(168, 85, 247, 0.3)" />
+                        <stop offset="60%" stopColor="rgba(236, 72, 153, 0.15)" />
                         <stop offset="100%" stopColor="transparent" />
                       </radialGradient>
                     </defs>
@@ -739,19 +747,19 @@ export default function Home() {
               <circle cx="400" cy="400" r="180" stroke="rgba(228,175,86,0.04)" strokeWidth="1" fill="none"/>
             </svg>
             <svg className="gem-zodiac-wheel" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="300" cy="300" r="270" stroke="rgba(228,175,86,0.08)" strokeWidth="1" fill="none" strokeDasharray="4 8"/>
-              <circle cx="300" cy="300" r="240" stroke="rgba(228,175,86,0.05)" strokeWidth="1" fill="none"/>
+              <circle cx="300" cy="300" r="270" stroke="rgba(168, 85, 247, 0.15)" strokeWidth="1" fill="none" strokeDasharray="4 8"/>
+              <circle cx="300" cy="300" r="240" stroke="rgba(236, 72, 153, 0.1)" strokeWidth="1" fill="none"/>
               {Array.from({length:12}).map((_,i)=>{
                 const a = i*30*Math.PI/180;
                 const x1=300+230*Math.cos(a), y1=300+230*Math.sin(a);
                 const x2=300+270*Math.cos(a), y2=300+270*Math.sin(a);
-                return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(228,175,86,0.12)" strokeWidth="1"/>;
+                return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(168, 85, 247, 0.2)" strokeWidth="1"/>;
               })}
               {Array.from({length:12}).map((_,i)=>{
                 const a = (i*30-15)*Math.PI/180;
                 const tx=300+255*Math.cos(a), ty=300+255*Math.sin(a);
                 const symbols = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
-                return <text key={i} x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fontSize="14" fill="rgba(228,175,86,0.22)">{symbols[i]}</text>;
+                return <text key={i} x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fontSize="14" fill="rgba(236, 72, 153, 0.3)">{symbols[i]}</text>;
               })}
             </svg>
 
@@ -766,9 +774,9 @@ export default function Home() {
                     d={`M ${xOffset} 0 
                        C ${xOffset + waveAmp} 200, ${xOffset - waveAmp} 400, ${xOffset} 600
                        S ${xOffset + waveAmp} 800, ${xOffset} 1000`}
-                    stroke={`rgba(235, 235, 250, ${0.3 + (i % 8) * 0.08})`}
-                    strokeWidth={1.8 + (i % 4) * 0.6}
-                    opacity={0.7 + (i % 12) * 0.02}
+                    stroke={`rgba(168, 85, 247, ${0.15 + (i % 8) * 0.05})`}
+                    strokeWidth={1.2 + (i % 4) * 0.4}
+                    opacity={0.6 + (i % 12) * 0.03}
                   />
                 );
               })}
