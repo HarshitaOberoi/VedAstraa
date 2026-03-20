@@ -24,6 +24,29 @@
   --cosmos-dark-rgb: 11, 31, 59;
 }
 
+/* Sparkling Golden Effect */
+.sparkle-gold {
+  background: linear-gradient(
+    to right,
+    #bf953f,
+    #fcf6ba,
+    #b38728,
+    #fbf5b7,
+    #aa771c
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+  filter: drop-shadow(0 0 1px rgba(228, 175, 86, 0.3));
+}
+
+.sparkle-gold-svg {
+  stroke: #ffd700;
+  fill: #ffd700;
+  filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));
+}
+
 /* Cosmic blue overlay variables and utilities
    Use the utility classes or the data attribute on an image or its wrapper
    to add an almost-transparent cosmic blue overlay to black / B&W images.
@@ -1015,7 +1038,11 @@ ul {
   font-family: var(--font-cinzel), serif;
   font-weight: 600;
   letter-spacing: -0.03em;
-  color: var(--gold);
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
   text-shadow: 0 8px 30px rgba(var(--cosmos-dark-rgb), 0.35);
 }
 
@@ -1135,9 +1162,13 @@ ul {
 .showcase-chip,
 .subsection-title,
 .how-step {
-  color: var(--gold);
   text-transform: uppercase;
   letter-spacing: 0.2em;
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
 
 .form-kicker,
@@ -1450,9 +1481,13 @@ ul {
 }
 
 .testimonial-stars {
-  color: var(--gold);
   letter-spacing: 0.25em;
   margin-bottom: 1rem;
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
 
 .services-section,
@@ -1663,11 +1698,16 @@ ul {
     radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.05), transparent 48%);
 }
 
+.trust-card h3,
 .service-card h3,
 .tool-card h3,
 .zodiac-card h3 {
   font-size: 1.35rem;
-  color: var(--gold);
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
 
 .service-card h3 {
@@ -1751,7 +1791,7 @@ ul {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #f2c26c, var(--gold-deep));
+  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
   box-shadow: 0 0 0 5px rgba(228, 175, 86, 0.08);
 }
 
@@ -2008,9 +2048,13 @@ ul {
   font-family: var(--font-cinzel), serif;
   font-size: 2rem;
   font-weight: 700;
-  color: var(--gold);
   letter-spacing: 0.05em;
   text-decoration: none;
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
 
 .footer-desc {
@@ -2040,7 +2084,7 @@ ul {
 
 .social-icon:hover {
   background: var(--gold);
-  color: var(--black);
+  color: #000;
   transform: translateY(-3px);
   border-color: var(--gold);
 }
@@ -2335,11 +2379,11 @@ ul {
   border: 0;
   border-radius: 0;
   background: none;
-  color: #ffffff;
+  color: #bf953f;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.08));
+  filter: drop-shadow(0 0 12px rgba(191, 149, 63, 0.4));
 }
 
 .zodiac-glyph-svg {
@@ -2347,7 +2391,7 @@ ul {
   height: 72px;
   overflow: visible;
   fill: none;
-  stroke: currentColor;
+  stroke: #bf953f;
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -2357,7 +2401,11 @@ ul {
   font-family: var(--font-cinzel), serif;
   font-size: 1.1rem;
   line-height: 1.2;
-  color: var(--gold);
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
 
 .horoscope-copy {
@@ -2746,10 +2794,14 @@ ul {
 .academy-milestone-step,
 .academy-visual-chip {
   margin: 0;
-  color: rgba(228, 175, 86, 0.9);
   text-transform: uppercase;
   letter-spacing: 0.24em;
   font-size: 0.72rem;
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
 
 .academy-journey-title {
@@ -4136,15 +4188,23 @@ ul {
 }
 
 .gem-heading {
-  color: #fbbf24;
   text-shadow:
     0 0 28px rgba(251, 191, 36, 0.45),
     0 14px 40px rgba(var(--cosmos-dark-rgb), 0.6);
   font-size: clamp(2.3rem, 4vw, 3.3rem);
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
 
 .gem-kicker {
-  color: rgba(249, 250, 251, 0.8);
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
 
 .gem-subheading {
@@ -4184,14 +4244,22 @@ ul {
   font-size: 0.8rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(248, 250, 252, 0.85);
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
 
 .gem-widget-title {
   margin: 0;
   font-family: var(--font-cinzel), serif;
   font-size: 1.5rem;
-  color: #e5e7eb;
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
 
 .gem-widget-subtitle {
@@ -4429,7 +4497,11 @@ ul {
 }
 
 .gem-card-price {
-  color: #fbbf24;
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
 
 .gem-card-cert {
@@ -4506,7 +4578,11 @@ ul {
   place-items: center;
   background: radial-gradient(circle at 30% 30%, rgba(251, 191, 36, 0.3), transparent 70%);
   border: 1px solid rgba(250, 204, 21, 0.85);
-  color: #fbbf24;
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
   font-size: 0.95rem;
   box-shadow: 0 0 18px rgba(250, 204, 21, 0.4);
 }

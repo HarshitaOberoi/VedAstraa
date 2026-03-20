@@ -670,7 +670,7 @@ export default function Home() {
                     </g>
 
                     {/* Central Mystic Star (Metatron-inspired) */}
-                    <g className="rotate-med" filter="url(#glow)">
+                    <g className="rotate-med " filter="url(#glow)">
                       <path 
                         d="M250 150 L280 220 L350 220 L295 265 L315 335 L250 290 L185 335 L205 265 L150 220 L220 220 Z" 
                         fill="none" stroke="rgba(251, 191, 36, 0.8)" strokeWidth="1.5"
@@ -737,7 +737,7 @@ export default function Home() {
 
       <section className="gemstones-section">
           {/* Sacred geometry background */}
-          <div className="gem-bg" aria-hidden="true">
+          <div className="gem-bg " aria-hidden="true">
             <svg className="gem-sacred-geo" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
               <polygon points="400,80 680,560 120,560" stroke="rgba(228,175,86,0.10)" strokeWidth="1" fill="none"/>
               <polygon points="400,720 120,240 680,240" stroke="rgba(228,175,86,0.10)" strokeWidth="1" fill="none"/>
@@ -817,13 +817,11 @@ export default function Home() {
                 <img src="/gemstone-bg.png" alt="Luxury gemstones on Vedic astrology chart" className="gem-bg-img"/>
               
                 {/* Gold sacred geometry SVG overlay on image */}
-                <svg className="gem-img-overlay-svg" viewBox="0 0 600 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <svg className="gem-img-overlay-svg " viewBox="0 0 600 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <circle cx="300" cy="210" r="160" stroke="rgba(228,175,86,0.22)" strokeWidth="1" strokeDasharray="5 10"/>
                   <circle cx="300" cy="210" r="110" stroke="rgba(228,175,86,0.15)" strokeWidth="1" strokeDasharray="3 7"/>
                   <polygon points="300,60 480,330 120,330" stroke="rgba(228,175,86,0.18)" strokeWidth="1" fill="none"/>
                   <polygon points="300,360 120,90 480,90" stroke="rgba(228,175,86,0.13)" strokeWidth="1" fill="none"/>
-                  <circle cx="300" cy="210" r="12" stroke="rgba(228,175,86,0.45)" strokeWidth="1.5" fill="rgba(228,175,86,0.08)"/>
-                  <circle cx="300" cy="210" r="3" fill="rgba(228,175,86,0.65)"/>
                   {Array.from({length:8}).map((_,i)=>{
                     const a=i*45*Math.PI/180;
                     return <line key={i} x1={300+14*Math.cos(a)} y1={210+14*Math.sin(a)} x2={300+22*Math.cos(a)} y2={210+22*Math.sin(a)} stroke="rgba(228,175,86,0.35)" strokeWidth="1"/>;
