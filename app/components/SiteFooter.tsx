@@ -64,7 +64,19 @@ export default function SiteFooter() {
       <div className="footer-shell">
         <div className="footer-brand">
           <Link href="/" className="footer-logo">
-            VedAstraa
+            <div className="static-shooting-star" aria-hidden="true">
+              <div className="shooting-star-ray"></div>
+              <div className="shooting-star-ray"></div>
+              <div className="shooting-star-ray"></div>
+              <div className="shooting-star-ray"></div>
+              <div className="shooting-star-ray"></div>
+              <div className="shooting-star-ray"></div>
+            </div>
+            VedAs<span className="logo-star-t" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 0L13.5 8.5L22 10L13.5 11.5L12 20L10.5 11.5L2 10L10.5 8.5L12 0Z" fill="currentColor" />
+              </svg>
+            </span>raa
           </Link>
           <p className="footer-desc">
             Empowering your spiritual journey through Vedic wisdom, astrology, and holistic healing. 

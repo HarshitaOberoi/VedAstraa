@@ -466,7 +466,7 @@ export default function Home() {
           <section className="hero-layout">
             <div className="hero-copy">
               <p className="eyebrow">Ancient insight, modern guidance</p>
-              <h1>Discover Your Destiny Through Ancient Wisdom</h1>
+              <h1>Discover <br /> Your Destiny Through Ancient <br /> Wisdom</h1>
               <p className="hero-text">
                 VedAstraa combines the timeless sciences of Vedic Astrology,
                 Numerology, Tarot, and Vastu with modern technology to deliver
