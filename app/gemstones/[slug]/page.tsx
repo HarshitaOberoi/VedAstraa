@@ -2,8 +2,6 @@ import { GEMSTONES, Gemstone } from "../data";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Sparkles, ShieldCheck, Zap, ArrowRight, Star, CheckCircle2 } from "lucide-react";
-import SiteHeader from "../../components/SiteHeader";
-import SiteFooter from "../../components/SiteFooter";
 import FadeIn from "../../components/FadeIn";
 import styles from "./GemstoneProduct.module.css";
 
@@ -43,9 +41,7 @@ export default async function GemstoneDetailsPage({ params }: PageProps) {
         <div className="nebula nebula-right" />
       </div>
       
-      <SiteHeader />
-      
-      <main>
+      <div className={styles.contentWrapper}>
         {/* Full-width Hero Section */}
         <section className={styles.hero}>
           <div className={styles.heroLeft}>
@@ -247,11 +243,8 @@ export default async function GemstoneDetailsPage({ params }: PageProps) {
               </div>
             </FadeIn>
           )}
-
         </div>
-      </main>
-
-      <SiteFooter />
+      </div>
     </div>
   );
 }
