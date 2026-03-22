@@ -202,23 +202,21 @@ export default function ServicesPage() {
                 >
                   <div className="va-service-card-ornament" aria-hidden="true" />
 
-                  <div className="va-service-horizontal-left">
+                  <div className="va-service-card-content">
                     <div className="va-service-icon" aria-hidden="true">
                       <span className="va-service-icon-ring" />
                       <ServiceIcon kind={service.icon} label={service.title} />
                     </div>
+                    
                     <h2 className="va-service-title">{service.title}</h2>
-                  </div>
 
-                  <div className="va-service-horizontal-middle">
                     <div className="va-service-meta">
                       <span className="va-chip">Verified experts</span>
                       <span className="va-chip va-chip-muted">1:1 session</span>
                     </div>
-                    <p className="va-service-desc">{service.description}</p>
-                  </div>
 
-                  <div className="va-service-horizontal-right">
+                    <p className="va-service-desc">{service.description}</p>
+
                     <ul
                       className="va-service-benefits"
                       aria-label={`${service.title} benefits`}
