@@ -1,162 +1,129 @@
+import Link from "next/link";
+import { GEMSTONES } from "../gemstones/data";
 import GemstoneRecommendationWidget from "./GemstoneRecommendationWidget";
 
-type Gemstone = {
-  name: string;
-  planet: string;
-  priceRange: string;
-  benefits: string;
-  image: string;
-  badge: string;
-};
-
-const GEMSTONES: Gemstone[] = [
-  {
-    name: "Blue Sapphire",
-    planet: "Saturn",
-    priceRange: "₹25,000 – ₹2,50,000",
-    benefits: "Recommended for disciplined growth, karmic relief, and focused progress in career and finances.",
-    image:
-      "https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=900&q=80",
-    badge: "Premium Neelam · Lab Certified",
-  },
-  {
-    name: "Yellow Sapphire",
-    planet: "Jupiter",
-    priceRange: "₹18,000 – ₹1,80,000",
-    benefits: "Supports wisdom, wealth attraction, marriage prospects, and graceful expansion of opportunities.",
-    image:
-      "https://images.unsplash.com/photo-1606318313647-1370b1f4a8f1?auto=format&fit=crop&w=900&q=80",
-    badge: "Pukhraj · Guru Strengthener",
-  },
-  {
-    name: "Emerald",
-    planet: "Mercury",
-    priceRange: "₹15,000 – ₹1,20,000",
-    benefits: "Enhances communication, business intelligence, trade, education, and sharp decision-making.",
-    image:
-      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80",
-    badge: "Panna · Budh Enhancer",
-  },
-  {
-    name: "Ruby",
-    planet: "Sun",
-    priceRange: "₹20,000 – ₹2,00,000",
-    benefits: "Ignites confidence, leadership, royal authority, and radiant self-expression.",
-    image:
-      "https://images.unsplash.com/photo-1574663817369-f747d3970902?auto=format&fit=crop&w=900&q=80",
-    badge: "Manik · Surya Balancer",
-  },
-  {
-    name: "Pearl",
-    planet: "Moon",
-    priceRange: "₹8,000 – ₹65,000",
-    benefits: "Brings emotional balance, inner peace, nurturing energy, and mental calmness.",
-    image:
-      "https://images.unsplash.com/photo-1585386959984-a4155223f3f8?auto=format&fit=crop&w=900&q=80",
-    badge: "Moti · Chandra Healer",
-  },
-  {
-    name: "Red Coral",
-    planet: "Mars",
-    priceRange: "₹12,000 – ₹95,000",
-    benefits: "Boosts courage, stamina, initiative, and victorious energy in competitive environments.",
-    image:
-      "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=900&q=80",
-    badge: "Moonga · Mangal Activator",
-  },
-  {
-    name: "Diamond",
-    planet: "Venus",
-    priceRange: "₹35,000 – ₹4,00,000",
-    benefits: "Aligns love, luxury, artistic success, relationships, and refined enjoyment of life.",
-    image:
-      "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=80",
-    badge: "Heera · Shukra Intensifier",
-  },
-  {
-    name: "Hessonite",
-    planet: "Rahu",
-    priceRange: "₹14,000 – ₹1,10,000",
-    benefits: "Stabilizes sudden karmic shifts, removes confusion, and supports unconventional success.",
-    image:
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=80",
-    badge: "Gomed · Rahu Balancer",
-  },
-  {
-    name: "Cat's Eye",
-    planet: "Ketu",
-    priceRange: "₹16,000 – ₹1,25,000",
-    benefits: "Protects from hidden enemies, psychic disturbances, and accelerates spiritual growth.",
-    image:
-      "https://images.unsplash.com/photo-1511389026070-a14ae610a1be?auto=format&fit=crop&w=900&q=80",
-    badge: "Lehsunia · Ketu Protector",
-  },
-];
-
 export default function GemstoneMarketplaceSection() {
+  const categories = [
+    {
+      id: "gemstones",
+      title: "Gemstones",
+      subtitle: "Divine energy encapsulated in Earth's rarest treasures for planetary alignment",
+      items: GEMSTONES.filter(
+        (gem) =>
+          !gem.name.toLowerCase().includes("rudraksha") &&
+          !gem.name.toLowerCase().includes("bracelet")
+      ),
+    },
+    {
+      id: "rudraksha",
+      title: "Rudraksha",
+      subtitle: "Sacred beads for spiritual awakening, protection, and inner peace",
+      items: GEMSTONES.filter((gem) => gem.name.toLowerCase().includes("rudraksha")),
+    },
+    {
+      id: "bracelets",
+      title: "Bracelets",
+      subtitle: "Wearable talismans for daily balance, healing, and holistic wellness",
+      items: GEMSTONES.filter((gem) => gem.name.toLowerCase().includes("bracelet")),
+    },
+  ];
+
   return (
     <section
-      id="gemstones"
+      id="gemstones-marketplace"
       className="gem-marketplace-section"
       aria-labelledby="gem-marketplace-heading"
     >
-      <div className="gem-marketplace-bg" aria-hidden="true">
-        <div className="gem-marketplace-stars gem-marketplace-stars-back" />
-        <div className="gem-marketplace-stars gem-marketplace-stars-front" />
-        <div className="gem-marketplace-nebula gem-marketplace-nebula-left" />
-        <div className="gem-marketplace-nebula gem-marketplace-nebula-right" />
-        <div className="gem-marketplace-orbit-ring" />
-        <div className="gem-marketplace-orbit-core" />
-        <div className="gem-marketplace-particles" />
+      {/* Cosmic Background Layers */}
+      <div className="gem-marketplace-fixed-bg">
+        <div className="hero-vignette" />
+        <div className="starfield starfield-back" />
+        <div className="starfield starfield-front" />
+        <div className="dust dust-one" />
+        <div className="dust dust-two" />
+        <div className="nebula nebula-left" />
+        <div className="nebula nebula-right" />
       </div>
 
       <div className="section-shell gem-marketplace-shell">
         <header className="gem-marketplace-header">
-          <p className="section-kicker gem-kicker">Premium Gemstone Marketplace</p>
+          <p className="section-kicker gem-kicker">Premium Collection</p>
           <h2 id="gem-marketplace-heading" className="section-title gem-heading">
-            Certified Gemstones for Planetary Balance
+            Sacred Remedies for Life&apos;s Journey
           </h2>
           <p className="gem-subheading">
-            Discover authentic, astrologically recommended gemstones that align with your planetary
-            energies and support your spiritual journey.
+            Discover authentic, lab-certified gemstones, rudraksha, and bracelets carefully selected
+            for their spiritual and planetary significance.
           </p>
         </header>
 
         <GemstoneRecommendationWidget />
 
-        <section className="gem-grid-section" aria-label="Premium gemstone marketplace">
-          <div className="gem-grid">
-            {GEMSTONES.map((gem) => (
-              <article key={gem.name} className="gem-card">
-                <div className="gem-card-media">
-                  <div
-                    className="gem-card-image"
-                    style={{ backgroundImage: `url(${gem.image})` }}
-                    aria-hidden="true"
-                  />
-                  <div className="gem-card-orbit" aria-hidden="true" />
-                  <span className="gem-auth-badge">{gem.badge}</span>
-                </div>
+        {categories.map((category) => (
+          <section
+            key={category.id}
+            id={category.id}
+            className="gem-category-section"
+            aria-label={category.title}
+          >
+            <header className="gem-category-header">
+              <h3 className="gem-category-title">{category.title}</h3>
+              <p className="gem-category-subtitle">{category.subtitle}</p>
+              <div className="gem-category-accent" aria-hidden="true" />
+            </header>
 
-                <div className="gem-card-body">
-                  <div className="gem-card-header">
-                    <h3 className="gem-card-title">{gem.name}</h3>
-                    <p className="gem-card-planet">Associated Planet: {gem.planet}</p>
-                  </div>
-                  <p className="gem-card-benefits">{gem.benefits}</p>
-                  <div className="gem-card-meta">
-                    <span className="gem-card-price">{gem.priceRange}</span>
-                    <span className="gem-card-cert">100% Natural · Lab Certified</span>
-                  </div>
-                  <div className="gem-card-actions">
-                    <button className="gem-btn gem-btn-primary">View Details</button>
-                    <button className="gem-btn gem-btn-secondary">Consult Astrologer</button>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
+            <div className="gem-grid-container">
+              <div className="gem-grid">
+                {category.items.map((gem) => (
+                  <article key={gem.name} className="gem-card">
+                    <Link href={`/gemstones/${gem.slug}`} className="gem-card-top block">
+                      <div className="gem-card-media">
+                        <div className="gem-card-image" aria-hidden="true">
+                          <img
+                            src={gem.image}
+                            alt={gem.name}
+                            className="gem-img-content"
+                            loading="lazy"
+                            decoding="async"
+                            width="400"
+                            height="400"
+                          />
+                          <div className="gem-card-overlay" aria-hidden="true" />
+                        </div>
+                        <span className="gem-card-tag">{gem.badge}</span>
+                      </div>
+                    </Link>
+
+                    <div className="gem-card-content">
+                      <div className="gem-card-header">
+                        <h3 className="gem-card-title">
+                          <Link href={`/gemstones/${gem.slug}`} className="hover:text-gold-400 transition-colors">
+                            {gem.name}
+                          </Link>
+                        </h3>
+                        <p className="gem-card-planet">{gem.planet}</p>
+                      </div>
+                      <p className="gem-card-description">{gem.benefits}</p>
+                    </div>
+
+                    <footer className="gem-card-footer">
+                      <div className="gem-card-pricing">
+                        <span className="gem-card-price">{gem.priceRange}</span>
+                        <span className="gem-card-cert">100% Natural · Lab Certified</span>
+                      </div>
+                      <div className="gem-card-actions">
+                        <Link href={`/gemstones/${gem.slug}`} className="gem-btn gem-btn-primary text-center">
+                          View Details
+                        </Link>
+                        <button className="gem-btn gem-btn-secondary">Consult Astrologer</button>
+                      </div>
+                    </footer>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        ))}
 
         <section
           className="gem-trust-strip"
@@ -223,7 +190,9 @@ export default function GemstoneMarketplaceSection() {
               <li>Recommended only after astrological suitability check</li>
               <li>Available in fine cuts with custom ring and pendant designs</li>
             </ul>
-            <button className="gem-spotlight-cta">Shop Now</button>
+            <Link href="/gemstones/blue-sapphire" className="gem-spotlight-cta inline-block text-center">
+              Shop Now
+            </Link>
           </div>
         </section>
 
@@ -269,8 +238,12 @@ export default function GemstoneMarketplaceSection() {
               </h3>
             </div>
             <div className="gem-luxury-actions">
-              <button className="gem-luxury-btn gem-luxury-btn-primary">Find My Gemstone</button>
-              <button className="gem-luxury-btn gem-luxury-btn-secondary">Browse All Gemstones</button>
+              <Link href="#gem-widget" className="gem-luxury-btn gem-luxury-btn-primary inline-block text-center">
+                Find My Gemstone
+              </Link>
+              <Link href="#gemstones" className="gem-luxury-btn gem-luxury-btn-secondary inline-block text-center">
+                Browse All Gemstones
+              </Link>
             </div>
           </div>
         </section>

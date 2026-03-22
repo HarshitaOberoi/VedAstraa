@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import FadeIn from "../components/FadeIn";
+import { useEffect } from "react";
 
 type Service = {
   title: string;
@@ -145,12 +148,24 @@ function ServiceIcon({ kind, label }: { kind: Service["icon"]; label: string }) 
   }
 }
 
-export const metadata = {
-  title: "VedAstraa | Services",
-  description: "Book premium spiritual services with verified experts.",
-};
-
 export default function ServicesPage() {
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const cards = document.getElementsByClassName("va-service-card");
+      for (const card of cards) {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        (card as HTMLElement).style.setProperty("--mouse-x", `${x}px`);
+        (card as HTMLElement).style.setProperty("--mouse-y", `${y}px`);
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <div className="va-services-page">
       <section className="va-services-hero">
@@ -187,35 +202,41 @@ export default function ServicesPage() {
                 >
                   <div className="va-service-card-ornament" aria-hidden="true" />
 
-                <div className="va-service-card-top">
-                  <div className="va-service-icon" aria-hidden="true">
-                    <span className="va-service-icon-ring" />
-                    <ServiceIcon kind={service.icon} label={service.title} />
+                  <div className="va-service-horizontal-left">
+                    <div className="va-service-icon" aria-hidden="true">
+                      <span className="va-service-icon-ring" />
+                      <ServiceIcon kind={service.icon} label={service.title} />
+                    </div>
+                    <h2 className="va-service-title">{service.title}</h2>
                   </div>
-                  <div className="va-service-headings">
+
+                  <div className="va-service-horizontal-middle">
                     <div className="va-service-meta">
                       <span className="va-chip">Verified experts</span>
                       <span className="va-chip va-chip-muted">1:1 session</span>
                     </div>
-                    <h2 className="va-service-title">{service.title}</h2>
                     <p className="va-service-desc">{service.description}</p>
                   </div>
-                </div>
 
-                <ul className="va-service-benefits" aria-label={`${service.title} benefits`}>
-                  {service.benefits.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
-                </ul>
+                  <div className="va-service-horizontal-right">
+                    <ul
+                      className="va-service-benefits"
+                      aria-label={`${service.title} benefits`}
+                    >
+                      {service.benefits.map((b) => (
+                        <li key={b}>{b}</li>
+                      ))}
+                    </ul>
 
-                <div className="va-service-actions">
-                  <Link href="#" className="va-btn va-btn-card">
-                    {service.cta}
-                    <span className="va-btn-arrow" aria-hidden="true">
-                      →
-                    </span>
-                  </Link>
-                </div>
+                    <div className="va-service-actions">
+                      <Link href="#" className="va-btn va-btn-card">
+                        {service.cta}
+                        <span className="va-btn-arrow" aria-hidden="true">
+                          →
+                        </span>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </FadeIn>
             ))}
