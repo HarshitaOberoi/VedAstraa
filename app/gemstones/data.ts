@@ -988,6 +988,7 @@ export const GEMSTONES: Gemstone[] = [
     specifications: {
       material: "Natural Mixed Stones",
       size: "8mm beads",
+      origin: "Mixed Sources",
       stones: "Amethyst, Lapis, Turquoise, Aventurine, Tiger Eye, Carnelian, Jasper",
       certification: "Authentic Stone Mix",
       design: "Energy Balance"
