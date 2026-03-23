@@ -604,13 +604,13 @@ export default function Home() {
                       {/* Outer double border with ticks */}
                       <circle cx="250" cy="250" r="230" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1" />
                       <circle cx="250" cy="250" r="222" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="0.5" />
-                      {Array.from({ length: 72 }).map((_, i) => (
+                      {Array.from({ length: 36 }).map((_, i) => (
                         <line 
                           key={`tick-${i}`}
-                          x1={250 + 222 * Math.cos(i * 5 * Math.PI / 180)}
-                          y1={250 + 222 * Math.sin(i * 5 * Math.PI / 180)}
-                          x2={250 + 230 * Math.cos(i * 5 * Math.PI / 180)}
-                          y2={250 + 230 * Math.sin(i * 5 * Math.PI / 180)}
+                          x1={250 + 222 * Math.cos(i * 10 * Math.PI / 180)}
+                          y1={250 + 222 * Math.sin(i * 10 * Math.PI / 180)}
+                          x2={250 + 230 * Math.cos(i * 10 * Math.PI / 180)}
+                          y2={250 + 230 * Math.sin(i * 10 * Math.PI / 180)}
                           stroke="rgba(255, 255, 255, 0.3)"
                           strokeWidth="0.5"
                         />
@@ -765,8 +765,8 @@ export default function Home() {
 
             {/* Lush Wavy silver grey lines - 80 paths for dense shimmery effect */}
             <svg className="gem-wavy-lines" viewBox="0 0 1000 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {Array.from({length: 80}).map((_, i) => {
-                const xOffset = 250 + (i * 9); // Dense but spaced across 1000px
+              {Array.from({length: 20}).map((_, i) => {
+                const xOffset = 250 + (i * 35); // Re-spaced for 20 lines
                 const waveAmp = 55 + (i % 10) * 6; // Rhythmic sinusoidal amplitude
                 return (
                   <path 
