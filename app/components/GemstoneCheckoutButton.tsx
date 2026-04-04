@@ -1,15 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import Script from "next/script";
 import { ArrowRight, Loader2 } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
 import styles from "../gemstones/[slug]/GemstoneProduct.module.css";
+import GemstonePayment from "./GemstonePayment";
 
 interface GemstoneCheckoutButtonProps {
   amount: number;
   name: string;
   description: string;
-  image?: string;
+  image: string;
+  planet: string;
 }
 
 export default function GemstoneCheckoutButton({
@@ -17,84 +19,36 @@ export default function GemstoneCheckoutButton({
   name,
   description,
   image,
+  planet,
 }: GemstoneCheckoutButtonProps) {
+  const [showPayment, setShowPayment] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handlePayment = async () => {
+  const handleAcquireClick = () => {
     setLoading(true);
-
-    try {
-      // Create order on the server
-      const response = await fetch("/api/razorpay", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          amount,
-          currency: "INR",
-          receipt: `receipt_${Date.now()}`,
-        }),
-      });
-
-      const order = await response.json();
-
-      if (order.error) {
-        throw new Error(order.error);
-      }
-
-      // Options for Razorpay
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_placeholder",
-        amount: order.amount,
-        currency: order.currency,
-        name: "VedAstraa",
-        description: `Acquire ${name}`,
-        image: image || "/logo.png",
-        order_id: order.id,
-        handler: function (response: any) {
-          alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
-          // You would typically redirect or update UI here
-        },
-        prefill: {
-          name: "",
-          email: "",
-          contact: "",
-        },
-        notes: {
-          address: "VedAstraa Headquarters",
-          product_name: name,
-        },
-        theme: {
-          color: "#d4af37", // Gold color to match VedAstraa theme
-        },
-      };
-
-      const rzp = new (window as any).Razorpay(options);
-      rzp.open();
-    } catch (error: any) {
-      console.error("Payment error:", error);
-      alert(`Payment failed: ${error.message || "Unknown error"}`);
-    } finally {
+    // Simulate a brief loading state for a premium feel
+    setTimeout(() => {
+      setShowPayment(true);
       setLoading(false);
-    }
+    }, 600);
+  };
+
+  const handlePaymentSuccess = () => {
+    setShowPayment(false);
+    alert("Order placed successfully! Our experts will contact you for the energization ritual details.");
   };
 
   return (
     <>
-      <Script
-        id="razorpay-checkout-js"
-        src="https://checkout.razorpay.com/v1/checkout.js"
-      />
       <button
         className={styles.primaryCta}
-        onClick={handlePayment}
+        onClick={handleAcquireClick}
         disabled={loading}
       >
         <span className="flex items-center gap-2">
           {loading ? (
             <>
-              Processing... <Loader2 className="w-4 h-4 animate-spin" />
+              Preparing... <Loader2 className="w-4 h-4 animate-spin" />
             </>
           ) : (
             <>
@@ -103,6 +57,22 @@ export default function GemstoneCheckoutButton({
           )}
         </span>
       </button>
+
+      <AnimatePresence>
+        {showPayment && (
+          <GemstonePayment
+            gem={{
+              name,
+              priceRange: `₹${amount}`,
+              basePrice: amount,
+              image,
+              planet,
+            }}
+            onClose={() => setShowPayment(false)}
+            onPaymentSuccess={handlePaymentSuccess}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }

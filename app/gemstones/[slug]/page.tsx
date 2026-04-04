@@ -84,6 +84,7 @@ export default async function GemstoneDetailsPage({ params }: PageProps) {
                 name={gem.name}
                 description={gem.benefits}
                 image={gem.image}
+                planet={gem.planet}
               />
               <button className={styles.secondaryCta}>Consult Astrologer</button>
             </div>

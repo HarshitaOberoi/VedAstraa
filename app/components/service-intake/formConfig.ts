@@ -32,6 +32,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDefinition> = {
     description: "A quick, heart-led check-in for the question weighing on you most.",
     microcopy: "Takes less than 1 minute ⏳",
     confidentialityNote: "100% confidential 🔒",
+    price: 501,
+    currency: "INR",
     steps: [
       {
         title: "Personal Energy",
@@ -94,6 +96,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDefinition> = {
     description: "A structured consultation form for understanding the energy of your space.",
     microcopy: "Takes less than 1 minute ⏳",
     confidentialityNote: "100% confidential 🔒",
+    price: 2100,
+    currency: "INR",
     steps: [
       {
         title: "Property Details",
@@ -157,6 +161,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDefinition> = {
     description: "A precise profile for name vibration and life-path guidance.",
     microcopy: "Takes less than 1 minute ⏳",
     confidentialityNote: "100% confidential 🔒",
+    price: 1101,
+    currency: "INR",
     steps: [
       {
         title: "Identity Details",
@@ -196,6 +202,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDefinition> = {
     description: "A trust-first birth details form for a precise Vedic astrology reading.",
     microcopy: "Takes less than 1 minute ⏳",
     confidentialityNote: "Your birth details are kept strictly confidential 🔒",
+    price: 1501,
+    currency: "INR",
     steps: [
       {
         title: "Birth Details",
@@ -237,6 +245,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDefinition> = {
     description: "A calm, spacious intake designed to feel safe and restorative.",
     microcopy: "Takes less than 1 minute ⏳",
     confidentialityNote: "100% confidential 🔒",
+    price: 2501,
+    currency: "INR",
     steps: [
       {
         title: "How You Feel",

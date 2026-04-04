@@ -14,6 +14,7 @@ import {
   SelectField,
   TextareaField,
 } from "./FormFields";
+import PaymentCheckout from "./PaymentCheckout";
 
 const reviewStepTitle = "Review";
 
@@ -61,13 +62,14 @@ function formatReviewValue(value: unknown) {
 export default function ServiceIntakeFlow({ selectedService }: { selectedService: ServiceKey }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [submittedService, setSubmittedService] = useState<ServiceKey | null>(null);
+  const [showPayment, setShowPayment] = useState(false);
   const formRef = useRef<HTMLDivElement | null>(null);
   const methods = useForm<FormValues>({ defaultValues, mode: "onChange" });
 
   const service = serviceDefinitions[selectedService];
   const totalSteps = service.steps.length + 1;
   const isReviewStep = currentStep === service.steps.length;
-  const progress = ((currentStep + 1) / totalSteps) * 100;
+  const progress = showPayment ? 100 : ((currentStep + 1) / totalSteps) * 100;
   const stepFields = service.steps[currentStep]?.fields ?? [];
   const values = methods.watch();
 
@@ -98,11 +100,12 @@ export default function ServiceIntakeFlow({ selectedService }: { selectedService
     methods.reset(defaultValues);
     setCurrentStep(0);
     setSubmittedService(null);
+    setShowPayment(false);
   }, [methods, selectedService]);
 
   useEffect(() => {
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [currentStep, selectedService]);
+  }, [currentStep, selectedService, showPayment]);
 
   const onNext = async () => {
     const valid = await methods.trigger(stepFields.map((field) => field.name));
@@ -110,8 +113,13 @@ export default function ServiceIntakeFlow({ selectedService }: { selectedService
   };
 
   const onSubmit = methods.handleSubmit(() => {
-    setSubmittedService(selectedService);
+    setShowPayment(true);
   });
+
+  const onPaymentSuccess = () => {
+    setShowPayment(false);
+    setSubmittedService(selectedService);
+  };
 
   return (
     <div
@@ -122,139 +130,151 @@ export default function ServiceIntakeFlow({ selectedService }: { selectedService
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent" />
 
       <div className="relative z-10 p-5 sm:p-8 lg:p-10">
-        <div className="flex flex-col gap-6 border-b border-white/10 pb-6 sm:flex-row sm:items-start sm:justify-between">
-          <div className="max-w-2xl">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.22em] text-slate-300">
-              <span className="text-amber-200">{service.icon}</span>
-              Intake Form
-            </div>
-            <h3 className="font-[var(--font-playfair)] text-2xl text-white sm:text-3xl">{service.title}</h3>
-            <p className="mt-3 max-w-xl text-sm leading-7 text-slate-300">{service.description}</p>
-          </div>
-
-          <div className="grid gap-3 sm:min-w-72">
-            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200">
-              <Sparkles className="h-4 w-4 text-amber-200" />
-              {service.microcopy}
-            </div>
-            <div className="flex items-center gap-3 rounded-2xl border border-emerald-200/15 bg-emerald-200/10 px-4 py-3 text-sm text-emerald-50">
-              <Lock className="h-4 w-4 text-emerald-200" />
-              {service.confidentialityNote}
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 space-y-4">
-          <div className="flex items-center justify-between text-xs uppercase tracking-[0.24em] text-slate-400">
-            <span>{isReviewStep ? reviewStepTitle : `Step ${currentStep + 1}`}</span>
-            <span>{currentStep + 1} / {totalSteps}</span>
-          </div>
-          <div className="h-2 overflow-hidden rounded-full bg-white/8">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-amber-200 via-rose-200 to-violet-200 transition-all duration-300"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <div className="grid gap-3 sm:grid-cols-3">
-            {[...service.steps.map((step) => step.title), reviewStepTitle].map((label, index) => (
-              <div
-                key={label}
-                className={`rounded-2xl border px-4 py-3 text-sm transition ${
-                  index === currentStep
-                    ? "border-amber-200/40 bg-amber-100/10 text-white"
-                    : index < currentStep
-                      ? "border-emerald-200/25 bg-emerald-200/10 text-emerald-50"
-                      : "border-white/10 bg-white/5 text-slate-400"
-                }`}
-              >
-                {label}
+        {!showPayment ? (
+          <>
+            <div className="flex flex-col gap-6 border-b border-white/10 pb-6 sm:flex-row sm:items-start sm:justify-between">
+              <div className="max-w-2xl">
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.22em] text-slate-300">
+                  <span className="text-amber-200">{service.icon}</span>
+                  Intake Form
+                </div>
+                <h3 className="font-[var(--font-playfair)] text-2xl text-white sm:text-3xl">{service.title}</h3>
+                <p className="mt-3 max-w-xl text-sm leading-7 text-slate-300">{service.description}</p>
               </div>
-            ))}
-          </div>
-        </div>
 
-        <form onSubmit={onSubmit} className="mt-8">
-          <AnimatePresence mode="wait">
-            <motion.div key={`${selectedService}-${currentStep}`} {...stepTransition}>
-              {!isReviewStep ? (
-                <div className="grid gap-6">
-                  <div>
-                    <h4 className="font-[var(--font-playfair)] text-xl text-white">
-                      {service.steps[currentStep].title}
-                    </h4>
-                    <p className="mt-2 text-sm leading-7 text-slate-300">
-                      {service.steps[currentStep].description}
-                    </p>
-                  </div>
-
-                  <div className="grid gap-5 lg:grid-cols-2">
-                    {stepFields.map((field) => (
-                      <div
-                        key={field.name}
-                        className={field.type === "textarea" || field.type === "checkbox-group" ? "lg:col-span-2" : ""}
-                      >
-                        {renderField(field, methods)}
-                      </div>
-                    ))}
-                  </div>
+              <div className="grid gap-3 sm:min-w-72">
+                <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200">
+                  <Sparkles className="h-4 w-4 text-amber-200" />
+                  {service.microcopy}
                 </div>
-              ) : (
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="font-[var(--font-playfair)] text-xl text-white">Review Your Details</h4>
-                    <p className="mt-2 text-sm leading-7 text-slate-300">
-                      Give everything a final look before continuing to payment.
-                    </p>
-                  </div>
-
-                  <div className="grid gap-4 md:grid-cols-2">
-                    {reviewItems.map((item) => (
-                      <div key={item.label} className="rounded-3xl border border-white/10 bg-white/5 p-5">
-                        <p className="text-xs uppercase tracking-[0.22em] text-slate-400">{item.label}</p>
-                        <p className="mt-2 text-sm leading-7 text-slate-100">{formatReviewValue(item.value)}</p>
-                      </div>
-                    ))}
-                  </div>
+                <div className="flex items-center gap-3 rounded-2xl border border-emerald-200/15 bg-emerald-200/10 px-4 py-3 text-sm text-emerald-50">
+                  <Lock className="h-4 w-4 text-emerald-200" />
+                  {service.confidentialityNote}
                 </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-
-          <div className="mt-8 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="text-sm text-slate-400">Required fields are validated before you move ahead.</div>
-
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <button
-                type="button"
-                onClick={() => setCurrentStep((step) => Math.max(step - 1, 0))}
-                disabled={currentStep === 0}
-                className="rounded-full border border-white/10 px-5 py-3 text-sm font-medium text-slate-200 transition hover:border-white/20 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                Back
-              </button>
-
-              {!isReviewStep ? (
-                <button
-                  type="button"
-                  onClick={onNext}
-                  disabled={!isCurrentStepReady}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-violet-300 px-6 py-3 text-sm font-bold text-slate-900 transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(252,211,77,0.3)] disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  Continue
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-violet-300 px-6 py-3 text-sm font-bold text-slate-900 transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(252,211,77,0.3)]"
-                >
-                  Continue to Payment
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              )}
+              </div>
             </div>
-          </div>
-        </form>
+
+            <div className="mt-6 space-y-4">
+              <div className="flex items-center justify-between text-xs uppercase tracking-[0.24em] text-slate-400">
+                <span>{isReviewStep ? reviewStepTitle : `Step ${currentStep + 1}`}</span>
+                <span>{currentStep + 1} / {totalSteps}</span>
+              </div>
+              <div className="h-2 overflow-hidden rounded-full bg-white/8">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-amber-200 via-rose-200 to-violet-200 transition-all duration-300"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+              <div className="grid gap-3 sm:grid-cols-3">
+                {[...service.steps.map((step) => step.title), reviewStepTitle].map((label, index) => (
+                  <div
+                    key={label}
+                    className={`rounded-2xl border px-4 py-3 text-sm transition ${
+                      index === currentStep
+                        ? "border-amber-200/40 bg-amber-100/10 text-white"
+                        : index < currentStep
+                          ? "border-emerald-200/25 bg-emerald-200/10 text-emerald-50"
+                          : "border-white/10 bg-white/5 text-slate-400"
+                    }`}
+                  >
+                    {label}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <form onSubmit={onSubmit} className="mt-8">
+              <AnimatePresence mode="wait">
+                <motion.div key={`${selectedService}-${currentStep}`} {...stepTransition}>
+                  {!isReviewStep ? (
+                    <div className="grid gap-6">
+                      <div>
+                        <h4 className="font-[var(--font-playfair)] text-xl text-white">
+                          {service.steps[currentStep].title}
+                        </h4>
+                        <p className="mt-2 text-sm leading-7 text-slate-300">
+                          {service.steps[currentStep].description}
+                        </p>
+                      </div>
+
+                      <div className="grid gap-5 lg:grid-cols-2">
+                        {stepFields.map((field) => (
+                          <div
+                            key={field.name}
+                            className={field.type === "textarea" || field.type === "checkbox-group" ? "lg:col-span-2" : ""}
+                          >
+                            {renderField(field, methods)}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-[var(--font-playfair)] text-xl text-white">Review Your Details</h4>
+                        <p className="mt-2 text-sm leading-7 text-slate-300">
+                          Give everything a final look before continuing to payment.
+                        </p>
+                      </div>
+
+                      <div className="grid gap-4 md:grid-cols-2">
+                        {reviewItems.map((item) => (
+                          <div key={item.label} className="rounded-3xl border border-white/10 bg-white/5 p-5">
+                            <p className="text-xs uppercase tracking-[0.22em] text-slate-400">{item.label}</p>
+                            <p className="mt-2 text-sm leading-7 text-slate-100">{formatReviewValue(item.value)}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+
+              <div className="mt-8 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                <div className="text-sm text-slate-400">Required fields are validated before you move ahead.</div>
+
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <button
+                    type="button"
+                    onClick={() => setCurrentStep((step) => Math.max(step - 1, 0))}
+                    disabled={currentStep === 0}
+                    className="rounded-full border border-white/10 px-5 py-3 text-sm font-medium text-slate-200 transition hover:border-white/20 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    Back
+                  </button>
+
+                  {!isReviewStep ? (
+                    <button
+                      type="button"
+                      onClick={onNext}
+                      disabled={!isCurrentStepReady}
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-violet-300 px-6 py-3 text-sm font-bold text-slate-900 transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(252,211,77,0.3)] disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      Continue
+                      <ArrowRight className="h-4 w-4" />
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-violet-300 px-6 py-3 text-sm font-bold text-slate-900 transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(252,211,77,0.3)]"
+                    >
+                      Continue to Payment
+                      <ArrowRight className="h-4 w-4" />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </form>
+          </>
+        ) : (
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
+            <PaymentCheckout 
+              service={service} 
+              onBack={() => setShowPayment(false)} 
+              onPaymentSuccess={onPaymentSuccess}
+            />
+          </motion.div>
+        )}
 
         {submittedService === selectedService ? (
           <div className="mt-6 flex items-start gap-3 rounded-3xl border border-emerald-200/20 bg-emerald-200/10 px-5 py-4 text-sm text-emerald-50">

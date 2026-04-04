@@ -76,6 +76,8 @@ export type ServiceDefinition = {
   description: string;
   microcopy: string;
   confidentialityNote: string;
+  price: number;
+  currency: string;
   steps: {
     title: string;
     description: string;

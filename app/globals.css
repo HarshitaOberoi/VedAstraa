@@ -1113,6 +1113,7 @@ ul {
   inset: 0;
   background-repeat: repeat;
   opacity: 0.95;
+  transform: translateZ(0); /* Hardware acceleration */
 }
 
 .starfield-back {
@@ -1141,6 +1142,7 @@ ul {
   opacity: 0.45;
   mix-blend-mode: screen;
   filter: blur(8px);
+  transform: translateZ(0); /* Hardware acceleration */
 }
 
 .dust-one {
@@ -1165,6 +1167,7 @@ ul {
   border-radius: 50%;
   opacity: 0.55;
   mix-blend-mode: screen;
+  transform: translateZ(0); /* Hardware acceleration */
 }
 
 .nebula-left {
@@ -2407,6 +2410,9 @@ ul {
 }
 
 @media (max-width: 768px) {
+  .horoscope-section {
+    display: none !important;
+  }
   .footer-links-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem 1.5rem;
@@ -4094,6 +4100,7 @@ ul {
   /* GPU Acceleration & Performance */
   content-visibility: auto;
   contain-intrinsic-size: 1000px;
+  transform: translateZ(0);
 }
 
 .gem-marketplace-fixed-bg {
@@ -4106,6 +4113,7 @@ ul {
 .gem-marketplace-shell {
   position: relative;
   z-index: 1;
+  transform: translateZ(0);
 }
 
 .gem-marketplace-header {
@@ -4156,7 +4164,7 @@ ul {
   box-shadow:
     0 24px 80px rgba(15, 23, 42, 0.9),
     0 0 0 1px rgba(248, 250, 252, 0.08);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(10px); /* Reduced from 18px for performance */
 }
 
 .gem-widget-header {
@@ -4323,6 +4331,7 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transform: translateZ(0);
 }
 
 .gem-category-title {
@@ -4366,6 +4375,7 @@ ul {
   gap: 32px;
   justify-content: center;
   width: 100%;
+  transform: translateZ(0);
 }
 
 @media (min-width: 1024px) {
