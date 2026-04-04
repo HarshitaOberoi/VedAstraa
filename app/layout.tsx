@@ -4,6 +4,7 @@ import "./tailwind.css";
 import "./globals.css";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
+import SmoothScroll from "./components/SmoothScroll";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -30,11 +31,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${playfair.variable} ${inter.variable}`}>
-        <div className="page-shell">
-          <SiteHeader />
-          <main>{children}</main>
-          <SiteFooter />
-        </div>
+        <SmoothScroll>
+          <div className="page-shell">
+            <SiteHeader />
+            <main>{children}</main>
+            <SiteFooter />
+          </div>
+        </SmoothScroll>
       </body>
     </html>
   );

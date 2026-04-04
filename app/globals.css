@@ -291,26 +291,7 @@ ul {
   background-blend-mode: screen, screen, screen, screen, normal, luminosity;
 }
 
-/* Scroll fade-in utility (used in Services page) */
-[data-fadein="true"] {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 700ms ease, transform 700ms ease;
-  will-change: opacity, transform;
-}
-
-[data-fadein="true"][data-visible="true"] {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-fadein="true"] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
+/* Scroll reveal styles are now consolidated at the end of the file */
 
 /* Services page (premium dark spiritual theme) */
 .va-services-page {
@@ -321,12 +302,29 @@ ul {
 
 .va-services-hero {
   position: relative;
-  padding: 8.25rem 2rem 5rem;
+  padding: 13rem 2rem 5rem;
   overflow: hidden;
   isolation: isolate;
   color: var(--va-text);
   content-visibility: auto;
   contain-intrinsic-size: 1000px;
+}
+
+@media (max-width: 1024px) {
+  .va-services-hero {
+    padding-top: 15rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .va-services-hero {
+    padding-top: 17rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .va-services-title {
+    font-size: 2.25rem;
+  }
 }
 
 .va-services-bg {
@@ -341,6 +339,7 @@ ul {
   inset: 0;
   pointer-events: none;
   opacity: 0.3;
+  transform: translateZ(0); /* Hardware acceleration */
 }
 
 .va-services-stars-back {
@@ -364,6 +363,7 @@ ul {
   filter: blur(80px);
   opacity: 0.4;
   pointer-events: none;
+  transform: translateZ(0); /* Hardware acceleration */
 }
 
 .va-services-nebula-one {
@@ -384,7 +384,7 @@ ul {
   left: 50%;
   width: 500px;
   height: 500px;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateZ(0);
   background: radial-gradient(circle, rgba(168, 85, 247, 0.15), transparent 70%);
   filter: blur(60px);
   pointer-events: none;
@@ -397,6 +397,16 @@ ul {
 .va-services-header {
   max-width: 760px;
   text-align: left;
+}
+
+@media (max-width: 768px) {
+  .va-services-header {
+    text-align: center;
+    margin: 0 auto;
+  }
+  .va-services-kicker {
+    justify-content: center;
+  }
 }
 
 .va-services-kicker {
@@ -422,6 +432,18 @@ ul {
   font-size: clamp(2.1rem, 3.6vw, 3.2rem);
   line-height: 1.08;
   letter-spacing: 0.01em;
+  background: linear-gradient(
+    to right,
+    #bf953f,
+    #fcf6ba,
+    #b38728,
+    #fbf5b7,
+    #aa771c
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
 
 .va-services-intro {
@@ -444,19 +466,22 @@ ul {
 
 .va-service-card {
   position: relative;
-  background: rgba(15, 23, 42, 0.4);
+  background: rgba(15, 23, 42, 0.45);
   border-radius: 32px;
   overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.4s ease, background 0.4s ease;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
+  /* Reduced blur for performance, only visible on hover if needed or kept light */
+  backdrop-filter: blur(8px);
   will-change: transform;
+  transform: translateZ(0); /* Hardware acceleration */
 }
 
 .va-service-card:hover {
-  transform: translateY(-8px);
-  background: rgba(30, 41, 59, 0.5);
+  transform: translateY(-8px) translateZ(0);
+  background: rgba(30, 41, 59, 0.6);
   border-color: rgba(168, 85, 247, 0.3);
+  backdrop-filter: blur(12px);
   box-shadow: 
     0 40px 80px -20px rgba(0, 0, 0, 0.8),
     0 0 40px -10px rgba(168, 85, 247, 0.1);
@@ -597,12 +622,18 @@ ul {
   line-height: 1.1;
   letter-spacing: 0.03em;
   font-family: var(--font-playfair), serif;
-  background: linear-gradient(135deg, #fff 30%, #f3e8ff 70%, #fff 100%);
+  background: linear-gradient(
+    to right,
+    #bf953f,
+    #fcf6ba,
+    #b38728,
+    #fbf5b7,
+    #aa771c
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent !important;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
 }
 
 .va-service-meta {
@@ -879,6 +910,35 @@ ul {
   padding: 0 20px;
 }
 
+@media (max-width: 1024px) {
+  .nav-bar {
+    gap: 1.25rem;
+    min-height: 72px;
+  }
+  .nav-link {
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+  }
+  .brand-mark {
+    font-size: 1.75rem;
+    margin: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-bar {
+    flex-wrap: wrap;
+    padding: 1rem 1.5rem;
+    gap: 0.75rem 1.25rem;
+  }
+  .brand-mark {
+    width: 100%;
+    justify-content: center;
+    order: -1;
+    margin-bottom: 0.5rem;
+  }
+}
+
 .nav-link,
 .brand-mark {
   text-transform: uppercase;
@@ -1014,9 +1074,23 @@ ul {
 .hero-section {
   position: relative;
   min-height: 100vh;
-  padding: 8.5rem 2rem 3rem;
+  padding: 13rem 2rem 3rem;
   overflow: hidden;
   isolation: isolate;
+}
+
+@media (max-width: 1024px) {
+  .hero-section {
+    padding-top: 15rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding-top: 17rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 
 .hero-vignette,
@@ -1257,8 +1331,9 @@ ul {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #f2c26c, var(--gold-deep));
-  color: #140d02;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #0f172a;
+  font-weight: 700;
 }
 
 .btn-secondary {
@@ -4956,17 +5031,25 @@ figure img,
   animation: fadeIn 1.2s ease-out forwards;
 }
 
-/* Scroll reveal helper */
+/* Optimized Scroll reveal helper */
 [data-fadein="true"] {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(24px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 [data-fadein="true"][data-visible="true"] {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-fadein="true"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Smooth zoom for product images */

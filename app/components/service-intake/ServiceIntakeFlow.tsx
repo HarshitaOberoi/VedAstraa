@@ -238,7 +238,7 @@ export default function ServiceIntakeFlow({ selectedService }: { selectedService
                   type="button"
                   onClick={onNext}
                   disabled={!isCurrentStepReady}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-200 via-rose-200 to-violet-200 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-violet-300 px-6 py-3 text-sm font-bold text-slate-900 transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(252,211,77,0.3)] disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Continue
                   <ArrowRight className="h-4 w-4" />
@@ -246,7 +246,7 @@ export default function ServiceIntakeFlow({ selectedService }: { selectedService
               ) : (
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-200 via-rose-200 to-violet-200 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:scale-[1.01]"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-violet-300 px-6 py-3 text-sm font-bold text-slate-900 transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(252,211,77,0.3)]"
                 >
                   Continue to Payment
                   <ArrowRight className="h-4 w-4" />
