@@ -1,6 +1,7 @@
 "use client";
 
 import FadeIn from "./components/FadeIn";
+import AstrologyToolsContainer from "./components/AstrologyToolsContainer";
 
 const navItems = [
   "Home",
@@ -156,14 +157,6 @@ const academyFeatures = [
     title: "Mentorship Opportunities",
     icon: "mentorship",
   },
-];
-
-const astrologyTools = [
-  "Birth Chart Calculator",
-  "Kundli Matching",
-  "Numerology Calculator",
-  "Moon Sign Finder",
-  "Tarot Card Draw",
 ];
 
 const zodiacSigns = [
@@ -604,33 +597,40 @@ export default function Home() {
                       {/* Outer double border with ticks */}
                       <circle cx="250" cy="250" r="230" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1" />
                       <circle cx="250" cy="250" r="222" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="0.5" />
-                      {Array.from({ length: 36 }).map((_, i) => (
-                        <line 
-                          key={`tick-${i}`}
-                          x1={250 + 222 * Math.cos(i * 10 * Math.PI / 180)}
-                          y1={250 + 222 * Math.sin(i * 10 * Math.PI / 180)}
-                          x2={250 + 230 * Math.cos(i * 10 * Math.PI / 180)}
-                          y2={250 + 230 * Math.sin(i * 10 * Math.PI / 180)}
-                          stroke="rgba(255, 255, 255, 0.3)"
-                          strokeWidth="0.5"
-                        />
-                      ))}
+                      {Array.from({ length: 36 }).map((_, i) => {
+                        const angle = i * 10 * Math.PI / 180;
+                        const x1 = (250 + 222 * Math.cos(angle)).toFixed(2);
+                        const y1 = (250 + 222 * Math.sin(angle)).toFixed(2);
+                        const x2 = (250 + 230 * Math.cos(angle)).toFixed(2);
+                        const y2 = (250 + 230 * Math.sin(angle)).toFixed(2);
+                        return (
+                          <line 
+                            key={`tick-${i}`}
+                            x1={x1}
+                            y1={y1}
+                            x2={x2}
+                            y2={y2}
+                            stroke="rgba(255, 255, 255, 0.3)"
+                            strokeWidth="0.5"
+                          />
+                        );
+                      })}
 
                       {/* Zodiac Sections and Symbols */}
                       {zodiacSigns.map((z, i) => {
                         const angle = (i * 30 - 90) * Math.PI / 180;
                         
                         // Section dividers
-                        const x1 = 250 + 100 * Math.cos(angle);
-                        const y1 = 250 + 100 * Math.sin(angle);
-                        const x2 = 250 + 222 * Math.cos(angle);
-                        const y2 = 250 + 222 * Math.sin(angle);
+                        const x1 = (250 + 100 * Math.cos(angle)).toFixed(2);
+                        const y1 = (250 + 100 * Math.sin(angle)).toFixed(2);
+                        const x2 = (250 + 222 * Math.cos(angle)).toFixed(2);
+                        const y2 = (250 + 222 * Math.sin(angle)).toFixed(2);
                         
                         // Symbol and Label positions
-                        const sx = 250 + 155 * Math.cos(angle + 15 * Math.PI / 180);
-                        const sy = 250 + 155 * Math.sin(angle + 15 * Math.PI / 180);
-                        const lx = 250 + 205 * Math.cos(angle + 15 * Math.PI / 180);
-                        const ly = 250 + 205 * Math.sin(angle + 15 * Math.PI / 180);
+                        const sx = (250 + 155 * Math.cos(angle + 15 * Math.PI / 180)).toFixed(2);
+                        const sy = (250 + 155 * Math.sin(angle + 15 * Math.PI / 180)).toFixed(2);
+                        const lx = (250 + 205 * Math.cos(angle + 15 * Math.PI / 180)).toFixed(2);
+                        const ly = (250 + 205 * Math.sin(angle + 15 * Math.PI / 180)).toFixed(2);
 
                         return (
                           <g key={z.name}>
@@ -751,13 +751,16 @@ export default function Home() {
               <circle cx="300" cy="300" r="240" stroke="rgba(236, 72, 153, 0.1)" strokeWidth="1" fill="none"/>
               {Array.from({length:12}).map((_,i)=>{
                 const a = i*30*Math.PI/180;
-                const x1=300+230*Math.cos(a), y1=300+230*Math.sin(a);
-                const x2=300+270*Math.cos(a), y2=300+270*Math.sin(a);
+                const x1=(300+230*Math.cos(a)).toFixed(2);
+                const y1=(300+230*Math.sin(a)).toFixed(2);
+                const x2=(300+270*Math.cos(a)).toFixed(2);
+                const y2=(300+270*Math.sin(a)).toFixed(2);
                 return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(168, 85, 247, 0.2)" strokeWidth="1"/>;
               })}
               {Array.from({length:12}).map((_,i)=>{
                 const a = (i*30-15)*Math.PI/180;
-                const tx=300+255*Math.cos(a), ty=300+255*Math.sin(a);
+                const tx=(300+255*Math.cos(a)).toFixed(2);
+                const ty=(300+255*Math.sin(a)).toFixed(2);
                 const symbols = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
                 return <text key={i} x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fontSize="14" fill="rgba(236, 72, 153, 0.3)">{symbols[i]}</text>;
               })}
@@ -824,7 +827,11 @@ export default function Home() {
                   <polygon points="300,360 120,90 480,90" stroke="rgba(228,175,86,0.13)" strokeWidth="1" fill="none"/>
                   {Array.from({length:8}).map((_,i)=>{
                     const a=i*45*Math.PI/180;
-                    return <line key={i} x1={300+14*Math.cos(a)} y1={210+14*Math.sin(a)} x2={300+22*Math.cos(a)} y2={210+22*Math.sin(a)} stroke="rgba(228,175,86,0.35)" strokeWidth="1"/>;
+                    const x1 = (300+14*Math.cos(a)).toFixed(2);
+                    const y1 = (210+14*Math.sin(a)).toFixed(2);
+                    const x2 = (300+22*Math.cos(a)).toFixed(2);
+                    const y2 = (210+22*Math.sin(a)).toFixed(2);
+                    return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(228,175,86,0.35)" strokeWidth="1"/>;
                   })}
                   <path d="M20,20 L60,20 M20,20 L20,60" stroke="rgba(228,175,86,0.4)" strokeWidth="1.5" fill="none"/>
                   <path d="M580,20 L540,20 M580,20 L580,60" stroke="rgba(228,175,86,0.4)" strokeWidth="1.5" fill="none"/>
@@ -988,17 +995,7 @@ export default function Home() {
             <p className="section-intro">
               Explore powerful tools to gain quick insights into your destiny.
             </p>
-            <div className="tools-grid">
-              {astrologyTools.map((tool) => (
-                <article key={tool} className="tool-card">
-                  <div className="tool-icon" aria-hidden="true" />
-                  <h3>{tool}</h3>
-                </article>
-              ))}
-            </div>
-            <a href="#" className="btn btn-primary section-cta">
-              Try Astrology Tools
-            </a>
+            <AstrologyToolsContainer />
           </div>
         </section>
 

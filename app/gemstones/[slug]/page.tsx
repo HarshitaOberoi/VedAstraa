@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Sparkles, ShieldCheck, Zap, ArrowRight, Star, CheckCircle2 } from "lucide-react";
 import FadeIn from "../../components/FadeIn";
 import styles from "./GemstoneProduct.module.css";
+import GemstoneCheckoutButton from "../../components/GemstoneCheckoutButton";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -78,11 +79,12 @@ export default async function GemstoneDetailsPage({ params }: PageProps) {
             </div>
 
             <div className={styles.ctaGroup}>
-              <button className={styles.primaryCta}>
-                <span className="flex items-center gap-2">
-                  Acquire Now <ArrowRight className="w-4 h-4" />
-                </span>
-              </button>
+              <GemstoneCheckoutButton
+                amount={gem.basePrice}
+                name={gem.name}
+                description={gem.benefits}
+                image={gem.image}
+              />
               <button className={styles.secondaryCta}>Consult Astrologer</button>
             </div>
           </div>
