@@ -923,21 +923,21 @@ export default function Home() {
 
                 <div className="academy-timeline" aria-label="VedAstraa Academy course timeline">
                   <span className="academy-timeline-line" aria-hidden="true" />
-                  {academyJourney.map((milestone, index) => (
-                    <article key={milestone.title} className="academy-milestone">
+                  {academyJourney.map((course, index) => (
+                    <article key={course.title} className="academy-course">
                       <div
-                        className="academy-milestone-bg"
-                        style={{ backgroundImage: `url(${milestone.image})` }}
+                        className="academy-course-bg"
+                        style={{ backgroundImage: `url(${course.image})` }}
                         aria-hidden="true"
                       />
-                      <div className="academy-milestone-content">
-                        <div className="academy-milestone-marker" aria-hidden="true">
-                          <AcademyIcon icon={milestone.icon} label={milestone.title} />
+                      <div className="academy-course-content">
+                        <div className="academy-course-marker" aria-hidden="true">
+                          <AcademyIcon icon={course.icon} label={course.title} />
                         </div>
-                        <div className="academy-milestone-copy">
-                          <span className="academy-milestone-step">Milestone {index + 1}</span>
-                          <h3>{milestone.title}</h3>
-                          <p>{milestone.detail}</p>
+                        <div className="academy-course-copy">
+                          <span className="academy-course-step">Course {index + 1}</span>
+                          <h3>{course.title}</h3>
+                          <p>{course.detail}</p>
                         </div>
                       </div>
                     </article>

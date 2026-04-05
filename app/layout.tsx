@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Playfair_Display, Inter, Roboto } from "next/font/google";
 import "./tailwind.css";
 import "./globals.css";
 import SiteFooter from "./components/SiteFooter";
@@ -18,6 +18,12 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
 });
 
+const roboto = Roboto({
+  subsets: ["latin"],
+  variable: "--font-roboto",
+  weight: ["300", "400", "500", "700"],
+});
+
 export const metadata: Metadata = {
   title: "VedAstraa | Astrology Readings",
   description: "Astrology readings and spiritual healing by VedAstraa.",
@@ -30,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${playfair.variable} ${inter.variable}`}>
+      <body className={`${playfair.variable} ${inter.variable} ${roboto.variable}`}>
         <SmoothScroll>
           <div className="page-shell">
             <SiteHeader />

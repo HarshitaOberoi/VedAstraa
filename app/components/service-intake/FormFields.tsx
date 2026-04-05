@@ -21,15 +21,15 @@ function FieldShell({
   return (
     <label className="block space-y-3">
       <div className="flex items-center justify-between gap-3">
-        <span className="text-sm font-medium tracking-[0.02em] text-slate-100">
+        <span className="text-base font-medium tracking-[0.02em] text-slate-100">
           {label}
           {required ? <span className="ml-1 text-purple-300">*</span> : null}
         </span>
-        {helperText ? <span className="text-xs text-slate-400">{helperText}</span> : null}
+        {helperText ? <span className="text-sm text-slate-400">{helperText}</span> : null}
       </div>
       {children}
       {error ? (
-        <span className="flex items-center gap-2 text-xs text-rose-300">
+        <span className="flex items-center gap-2 text-sm text-rose-300">
           <AlertCircle className="h-3.5 w-3.5" />
           {error}
         </span>
@@ -39,7 +39,7 @@ function FieldShell({
 }
 
 const baseFieldClassName =
-  "w-full rounded-2xl border border-white/10 bg-slate-900/50 px-4 py-3 text-sm text-slate-50 placeholder:text-slate-400 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] outline-none transition duration-200 focus:border-purple-300/50 focus:bg-slate-900/80 focus:ring-2 focus:ring-purple-300/20 backdrop-blur-sm";
+  "w-full rounded-2xl border border-white/10 bg-slate-900/50 px-4 py-3 text-base text-slate-50 placeholder:text-slate-400 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] outline-none transition duration-200 focus:border-purple-300/50 focus:bg-slate-900/80 focus:ring-2 focus:ring-purple-300/20 backdrop-blur-sm";
 
 export function InputField({
   field,
@@ -130,7 +130,7 @@ export function SelectField({
 function ChoiceChip({ option, checked }: { option: Option; checked: boolean }) {
   return (
     <span
-      className={`inline-flex min-h-12 items-center rounded-2xl border px-4 py-3 text-sm transition ${
+      className={`inline-flex min-h-12 items-center rounded-2xl border px-4 py-3 text-base transition ${
         checked
           ? "border-purple-300/60 bg-purple-300/15 text-purple-50 shadow-[0_0_24px_rgba(168,85,247,0.18)]"
           : "border-white/10 bg-slate-900/50 text-slate-200 hover:border-white/20 hover:bg-slate-900/80 backdrop-blur-sm"
