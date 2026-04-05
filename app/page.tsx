@@ -20,25 +20,25 @@ const trustItems = [
     icon: "VA",
     title: "Verified Astrologers",
     description: "Experienced practitioners offering real Vedic guidance.",
-    image: "https://images.unsplash.com/photo-1504333638930-c8787321eee0?q=80&w=800&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop"
   },
   {
     icon: "AG",
     title: "Authentic Gemstones",
     description: "Carefully sourced spiritual remedies and energized stones.",
-    image: "https://images.unsplash.com/photo-1520121401995-928cd50d4e27?q=80&w=800&auto=format&fit=crop"
+    image: "/downloaded_images/Rose_Quartz_Bracelets.png"
   },
   {
     icon: "AP",
     title: "Accurate Predictions",
     description: "Insightful analysis grounded in trusted ancient sciences.",
-    image: "https://images.unsplash.com/photo-1518562180175-34a163b1a9a6?q=80&w=800&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1515942661900-94b3d1972591?q=80&w=800&auto=format&fit=crop"
   },
   {
     icon: "SC",
     title: "Secure Consultations",
     description: "Private, protected, and convenient sessions with experts.",
-    image: "https://images.unsplash.com/photo-1601006626938-f91039860c18?q=80&w=800&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=800&auto=format&fit=crop"
   },
 ];
 
@@ -57,7 +57,7 @@ const services = [
       "Understand how numbers influence your life path, personality, relationships, and success.",
     button: "Explore Numerology",
     image:
-      "https://images.unsplash.com/photo-1518562180175-34a163b1a9a6?auto=format&fit=crop&w=1200&q=80",
+      "https://astrala.imgix.net/6sb2cxWciCvcbY12DpU8eC/95d59b3f79bf3cabc567da2ca50b63e7/name-numerology-destiny-soul-urge-personality-numbers.jpg?w=1080&q=60&auto=format,compress",
   },
   {
     title: "Tarot Card Reading",
@@ -65,7 +65,7 @@ const services = [
       "Get intuitive guidance on love, career, finances, and life decisions through tarot card readings.",
     button: "Get a Reading",
     image:
-      "https://images.unsplash.com/photo-1766766462775-3a6fd522e138?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1200",
+      "https://ppiyanshi.com/cdn/shop/products/live-tarot-card-reading-course-121542.jpg?v=1707504050",
   },
   {
     title: "Vastu Consultation",
@@ -81,7 +81,7 @@ const services = [
       "Balance your chakras and cleanse your aura through powerful spiritual healing sessions.",
     button: "Start Healing",
     image:
-      "https://images.unsplash.com/photo-1767610679392-5bcb618dbc29?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1200",
+      "https://slvpost.com/wp-content/uploads/2023/08/meditation-1384758_1280-800.jpg",
   },
 ];
 
@@ -332,25 +332,25 @@ const whyChooseItems = [
     title: "Verified Experts",
     description:
       "Every astrologer on our platform undergoes strict verification to ensure credibility and experience.",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "Transparent Predictions",
     description:
       "We maintain transparency through ratings, reviews, and prediction performance tracking.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1515942661900-94b3d1972591?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "Authentic Products",
     description:
       "All gemstones and spiritual products are certified and sourced from trusted suppliers.",
-    image: "https://images.unsplash.com/photo-1520121401995-928cd50d4e27?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1596450514735-1100067a805a?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "Personalized Experience",
     description:
       "Your birth details power a fully personalized spiritual journey.",
-    image: "https://images.unsplash.com/photo-1464802686167-b939a67a06a1?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1504333638930-c8787321eee0?auto=format&fit=crop&w=800&q=80"
   },
 ];
 
@@ -378,14 +378,14 @@ const howItWorksSteps = [
     title: "Create Your Birth Profile",
     description:
       "Enter your birth details to generate your personalized astrology dashboard.",
-    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80"
+    image: "https://threemoonmagic.com/cdn/shop/products/A4MOCKPURPLE.jpg?v=1655549128&width=1946"
   },
   {
     step: "Step 2",
     title: "Explore Insights",
     description:
       "Receive daily predictions, remedies, and spiritual guidance.",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+    image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUgAY_PgC66A7E4e4uM1KWgvxfNaiA8HltIblxQ36yOEVeipEtAO621Z6n67RduSHMYoYX2P5I0pSkokMuYq03M_tYkpjii46KFED97ScwTi0pKwkzt_GopSecsEkIJE3n7ZVK/s1600/fortune-teller-2.jpeg"
   },
   {
     step: "Step 3",
@@ -399,7 +399,7 @@ const howItWorksSteps = [
     title: "Enhance Your Journey",
     description:
       "Purchase recommended gemstones or enroll in spiritual courses.",
-    image: "https://images.unsplash.com/photo-1493673272479-a20888bcee10?auto=format&fit=crop&w=800&q=80"
+    image: "https://thumbs.dreamstime.com/b/celestial-compass-stunning-galaxy-symbolic-fantasy-journey-astrology-beyond-352993406.jpg"
   },
 ];
 
@@ -554,7 +554,7 @@ export default function Home() {
               {services.map((service) => (
                 <article key={service.title} className="service-card">
                   <div
-                    className="service-media"
+                    className="service-media bw"
                     style={{ backgroundImage: `url(${service.image})` }}
                     aria-hidden="true"
                   />
@@ -926,7 +926,7 @@ export default function Home() {
                   {academyJourney.map((course, index) => (
                     <article key={course.title} className="academy-course">
                       <div
-                        className="academy-course-bg"
+                        className="academy-course-bg bw"
                         style={{ backgroundImage: `url(${course.image})` }}
                         aria-hidden="true"
                       />
@@ -1034,7 +1034,7 @@ export default function Home() {
               {whyChooseItems.map((item) => (
                 <article key={item.title} className="why-card">
                   <div
-                    className="why-card-bg"
+                    className="why-card-bg bw"
                     style={{ backgroundImage: `url(${item.image})` }}
                     aria-hidden="true"
                   />
@@ -1077,7 +1077,7 @@ export default function Home() {
               {howItWorksSteps.map((item) => (
                 <article key={item.step} className="how-card">
                   <div
-                    className="how-card-bg"
+                    className="how-card-bg bw"
                     style={{ backgroundImage: `url(${item.image})` }}
                     aria-hidden="true"
                   />

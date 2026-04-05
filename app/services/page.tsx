@@ -129,12 +129,21 @@ export default function ServicesPage() {
         <div className="section-shell va-services-shell">
           <FadeIn as="header" className="va-services-header">
             <p className="va-services-kicker">Our Spiritual Services</p>
-            <h1 className="va-services-title">Ancient Wisdom. Modern Guidance.</h1>
-            <p className="va-services-intro">
-              VedAstraa brings together multiple sacred sciences to provide clarity,
-              direction, and balance in your life. Choose a service below and the right intake
-              form opens instantly so your journey can begin with the right context.
-            </p>
+            <h1 className="va-services-title">
+              <span className="va-title-accent">Ancient Wisdom.</span>
+              <span className="va-title-main">Modern Guidance.</span>
+            </h1>
+            <div className="va-services-intro-container">
+              <p className="va-services-intro-main">
+                VedAstraa brings together multiple <span>sacred sciences</span> to provide
+                <span>clarity</span>, <span>direction</span>, and <span>balance</span> in your life.
+              </p>
+              <div className="va-services-intro-divider" />
+              <p className="va-services-intro-sub">
+                Choose a service below and the right intake form opens instantly so your journey
+                can begin with the right context.
+              </p>
+            </div>
           </FadeIn>
 
           <div className="va-services-grid" role="list">

@@ -395,23 +395,38 @@ ul {
 }
 
 .va-services-header {
-  max-width: 760px;
-  text-align: left;
+  max-width: 850px;
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Decorative backdrop for the header */
+.va-services-header::after {
+  content: "SPIRITUAL";
+  position: absolute;
+  top: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8rem;
+  font-weight: 900;
+  color: rgba(168, 85, 247, 0.03);
+  z-index: -1;
+  pointer-events: none;
+  letter-spacing: 0.1em;
 }
 
 @media (max-width: 768px) {
-  .va-services-header {
-    text-align: center;
-    margin: 0 auto;
-  }
-  .va-services-kicker {
-    justify-content: center;
+  .va-services-header::after {
+    font-size: 5rem;
+    top: -1rem;
   }
 }
 
 .va-services-kicker {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -420,38 +435,108 @@ ul {
   font-size: 0.9rem;
 }
 
-.va-services-kicker::before {
+.va-services-kicker::before,
+.va-services-kicker::after {
   content: "";
   width: 34px;
   height: 1px;
+}
+
+.va-services-kicker::before {
   background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.95));
 }
 
+.va-services-kicker::after {
+  background: linear-gradient(-90deg, transparent, rgba(168, 85, 247, 0.95));
+}
+
 .va-services-title {
-  margin: 0.9rem 0 0.85rem;
+  margin: 1.25rem 0 2rem;
   font-family: var(--font-playfair), serif;
-  font-size: clamp(2.1rem, 3.6vw, 3.2rem);
-  line-height: 1.08;
-  letter-spacing: 0.01em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: relative;
+  align-items: center;
+}
+
+.va-title-accent {
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgba(248, 250, 252, 0.55);
+  margin-bottom: -0.25rem;
+}
+
+.va-title-main {
+  font-size: clamp(2.5rem, 5.5vw, 4.8rem);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   background: linear-gradient(
-    to right,
-    #bf953f,
-    #fcf6ba,
-    #b38728,
-    #fbf5b7,
-    #aa771c
+    to bottom right,
+    #bf953f 0%,
+    #fcf6ba 25%,
+    #b38728 50%,
+    #fbf5b7 75%,
+    #aa771c 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent !important;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
 }
 
-.va-services-intro {
+.va-services-intro-container {
+  margin: 1.5rem auto 0;
+  padding: 1.5rem 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  border-top: 3px solid #a855f7;
+  border-radius: 16px;
+  max-width: 680px;
+  box-shadow: 
+    0 10px 30px -10px rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(168, 85, 247, 0.05);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .va-services-intro-container {
+    padding: 1.25rem;
+  }
+}
+
+.va-services-intro-main {
   margin: 0;
-  color: rgba(248, 250, 252, 0.78);
-  line-height: 1.75;
-  font-size: 1.15rem;
+  color: rgba(248, 250, 252, 0.95);
+  line-height: 1.6;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.va-services-intro-main span {
+  color: #a855f7;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+}
+
+.va-services-intro-divider {
+  height: 1px;
+  width: 60px;
+  background: linear-gradient(90deg, transparent, #a855f7, transparent);
+  margin: 1rem auto;
+}
+
+.va-services-intro-sub {
+  margin: 0;
+  color: rgba(248, 250, 252, 0.65);
+  line-height: 1.5;
+  font-size: 1rem;
+  font-style: italic;
 }
 
 /* ─── PREMIUM COSMIC SERVICES LAYOUT ─── */
@@ -1589,17 +1674,23 @@ ul {
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: grayscale(1) brightness(0.85) contrast(1.2);
+  filter: brightness(0.7) contrast(1.1);
   transition: transform 0.6s ease, filter 0.6s ease, brightness 0.6s ease;
   z-index: 0;
   opacity: 0.9;
+}
+
+.academy-course-bg.bw,
+.why-card-bg.bw,
+.how-card-bg.bw {
+  filter: grayscale(1) brightness(0.7) contrast(1.1);
 }
 
 .trust-card-bg::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(var(--cosmos-dark-rgb), 0.2) 0%, rgba(var(--cosmos-dark-rgb), 0.8) 100%);
+  background: linear-gradient(180deg, rgba(var(--cosmos-dark-rgb), 0.1) 0%, rgba(var(--cosmos-dark-rgb), 0.6) 100%);
   z-index: 1;
 }
 
@@ -1622,7 +1713,13 @@ ul {
 .how-card:hover .how-card-bg,
 .academy-course:hover .academy-course-bg {
   transform: scale(1.1);
-  filter: grayscale(1) brightness(0.8);
+  filter: brightness(0.6);
+}
+
+.academy-course:hover .academy-course-bg.bw,
+.why-card:hover .why-card-bg.bw,
+.how-card:hover .how-card-bg.bw {
+  filter: grayscale(1) brightness(0.6);
 }
 
 .trust-card-content,
@@ -1891,6 +1988,9 @@ ul {
   background-color: #161616;
   background-position: center;
   background-size: cover;
+}
+
+.service-media.bw {
   filter: grayscale(1);
 }
 
@@ -1945,15 +2045,121 @@ ul {
   font-family: var(--font-roboto), sans-serif;
 }
 
-.tool-icon {
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  border: 1px solid rgba(228, 175, 86, 0.25);
-  background: radial-gradient(circle at 35% 35%, rgba(228, 175, 86, 0.22), transparent 58%);
+.tools-grid-premium {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .tools-grid-premium {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .tools-grid-premium {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.tool-card-premium {
+  position: relative;
+  height: 320px;
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  isolation: isolate;
+}
+
+.tool-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease, filter 0.6s ease;
+  z-index: -1;
+}
+
+.tool-card-bg.bw {
+  filter: grayscale(1) brightness(0.4) contrast(1.1);
+}
+
+.tool-card-premium:hover .tool-card-bg {
+  transform: scale(1.1);
+  filter: grayscale(0) brightness(0.5);
+}
+
+.tool-card-content {
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.4) 50%, transparent 100%);
+  z-index: 1;
+}
+
+.tool-card-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 12px;
   display: grid;
   place-items: center;
-  margin-bottom: 1.25rem;
+  font-size: 1.5rem;
+  color: #a855f7;
+  transition: all 0.3s ease;
+}
+
+.tool-card-premium:hover .tool-card-icon {
+  background: #a855f7;
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+}
+
+.tool-card-text h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-playfair), serif;
+  background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tool-card-text p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.tool-card-action {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #a855f7;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.tool-card-premium:hover .tool-card-action {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.tool-card-premium:hover {
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(168, 85, 247, 0.1);
 }
 
 .zodiac-glyph {

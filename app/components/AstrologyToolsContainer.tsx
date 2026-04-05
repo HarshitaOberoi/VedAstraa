@@ -11,12 +11,53 @@ import TarotResult from "./TarotResult";
 import { BirthDetails, MatchDetails } from "../../lib/astrologyApi";
 
 const astrologyTools = [
-  { id: "birth-chart", name: "Birth Chart Calculator" },
-  { id: "kundli-matching", name: "Kundli Matching" },
-  { id: "numerology", name: "Numerology Calculator" },
-  { id: "moon-sign", name: "Moon Sign Finder" },
-  { id: "tarot", name: "Tarot Card Draw" },
+  { 
+    id: "birth-chart", 
+    name: "Birth Chart Calculator",
+    description: "Detailed analysis of planetary positions at your birth.",
+    icon: "zodiac",
+    image: "https://images.unsplash.com/photo-1515942661900-94b3d1972591?q=80&w=800&auto=format&fit=crop"
+  },
+  { 
+    id: "kundli-matching", 
+    name: "Kundli Matching",
+    description: "Vedic compatibility analysis for marriage and relationships.",
+    icon: "match",
+    image: "https://3.imimg.com/data3/BY/OB/MY-9759711/kundli-match-making-500x500.jpg"
+  },
+  { 
+    id: "numerology", 
+    name: "Numerology Calculator",
+    description: "Discover the hidden meaning behind your name and birth date.",
+    icon: "numbers",
+    image: "https://astrala.imgix.net/6sb2cxWciCvcbY12DpU8eC/95d59b3f79bf3cabc567da2ca50b63e7/name-numerology-destiny-soul-urge-personality-numbers.jpg?w=1080&q=60&auto=format,compress"
+  },
+  { 
+    id: "moon-sign", 
+    name: "Moon Sign Finder",
+    description: "Find your Moon sign to understand your emotional core.",
+    icon: "moon",
+    image: "https://www.santoshsharmaa.com/wp-content/uploads/2025/10/sun-moon.webp"
+  },
+  { 
+    id: "tarot", 
+    name: "Tarot Card Draw",
+    description: "Receive intuitive guidance with a single card pull.",
+    icon: "tarot",
+    image: "https://ppiyanshi.com/cdn/shop/products/live-tarot-card-reading-course-121542.jpg?v=1707504050"
+  },
 ];
+
+function ToolIcon({ kind }: { kind: string }) {
+  switch (kind) {
+    case "zodiac": return <span>✦</span>;
+    case "match": return <span>⚭</span>;
+    case "numbers": return <span>⬡</span>;
+    case "moon": return <span>☽</span>;
+    case "tarot": return <span>🃏</span>;
+    default: return <span>✦</span>;
+  }
+}
 
 export default function AstrologyToolsContainer() {
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
@@ -49,15 +90,29 @@ export default function AstrologyToolsContainer() {
   const renderTool = () => {
     if (!selectedTool) {
       return (
-        <div className="tools-grid">
+        <div className="tools-grid-premium">
           {astrologyTools.map((tool) => (
             <article 
               key={tool.id} 
-              className="tool-card cursor-pointer" 
+              className="tool-card-premium" 
               onClick={() => handleToolSelect(tool.id)}
             >
-              <div className="tool-icon" aria-hidden="true" />
-              <h3>{tool.name}</h3>
+              <div 
+                className="tool-card-bg bw" 
+                style={{ backgroundImage: `url(${tool.image})` }}
+              />
+              <div className="tool-card-content">
+                <div className="tool-card-icon">
+                  <ToolIcon kind={tool.icon} />
+                </div>
+                <div className="tool-card-text">
+                  <h3>{tool.name}</h3>
+                  <p>{tool.description}</p>
+                </div>
+                <div className="tool-card-action">
+                  <span>Explore Tool →</span>
+                </div>
+              </div>
             </article>
           ))}
         </div>
