@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, Roboto } from "next/font/google";
+import { Playfair_Display, Inter, Roboto, Petrona } from "next/font/google";
 import "./tailwind.css";
 import "./globals.css";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import SmoothScroll from "./components/SmoothScroll";
+
+const petrona = Petrona({
+  subsets: ["latin"],
+  variable: "--font-petrona",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -36,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${playfair.variable} ${inter.variable} ${roboto.variable}`}>
+      <body className={`${playfair.variable} ${inter.variable} ${roboto.variable} ${petrona.variable}`}>
         <SmoothScroll>
           <div className="page-shell">
             <SiteHeader />

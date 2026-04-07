@@ -159,20 +159,51 @@ const academyFeatures = [
   },
 ];
 
+
 const zodiacSigns = [
-  { name: "Aries", icon: "aries" },
-  { name: "Taurus", icon: "taurus" },
-  { name: "Gemini", icon: "gemini" },
-  { name: "Cancer", icon: "cancer" },
-  { name: "Leo", icon: "leo" },
-  { name: "Virgo", icon: "virgo" },
-  { name: "Libra", icon: "libra" },
-  { name: "Scorpio", icon: "scorpio" },
-  { name: "Sagittarius", icon: "sagittarius" },
-  { name: "Capricorn", icon: "capricorn" },
-  { name: "Aquarius", icon: "aquarius" },
-  { name: "Pisces", icon: "pisces" },
+  { name: 'Aries', icon: 'aries' },
+  { name: 'Taurus', icon: 'taurus' },
+  { name: 'Gemini', icon: 'gemini' },
+  { name: 'Cancer', icon: 'cancer' },
+  { name: 'Leo', icon: 'leo' },
+  { name: 'Virgo', icon: 'virgo' },
+  { name: 'Libra', icon: 'libra' },
+  { name: 'Scorpio', icon: 'scorpio' },
+  { name: 'Sagittarius', icon: 'sagittarius' },
+  { name: 'Capricorn', icon: 'capricorn' },
+  { name: 'Aquarius', icon: 'aquarius' },
+  { name: 'Pisces', icon: 'pisces' },
 ];
+const wheelPolarPoint = (radius: number, angleDeg: number) => {
+  const angle = (angleDeg - 90) * Math.PI / 180;
+  return {
+    x: Number((250 + radius * Math.cos(angle)).toFixed(2)),
+    y: Number((250 + radius * Math.sin(angle)).toFixed(2)),
+  };
+};
+
+const describeWheelArc = (radius: number, startAngle: number, endAngle: number) => {
+  const start = wheelPolarPoint(radius, startAngle);
+  const end = wheelPolarPoint(radius, endAngle);
+  const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
+  return `M ${start.x} ${start.y} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${end.x} ${end.y}`;
+};
+
+const describeWheelSector = (innerRadius: number, outerRadius: number, startAngle: number, endAngle: number) => {
+  const outerStart = wheelPolarPoint(outerRadius, startAngle);
+  const outerEnd = wheelPolarPoint(outerRadius, endAngle);
+  const innerEnd = wheelPolarPoint(innerRadius, endAngle);
+  const innerStart = wheelPolarPoint(innerRadius, startAngle);
+  const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
+
+  return [
+    `M ${outerStart.x} ${outerStart.y}`,
+    `A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${outerEnd.x} ${outerEnd.y}`,
+    `L ${innerEnd.x} ${innerEnd.y}`,
+    `A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${innerStart.x} ${innerStart.y}`,
+    'Z',
+  ].join(' ');
+};
 
 const zodiacIconPaths: Record<string, string[]> = {
   aries: [
@@ -443,6 +474,311 @@ const footerColumns = [
   },
 ];
 
+function PinkZodiacWheel() {
+  return (
+    <svg className='cosmic-expert-svg' viewBox='0 0 500 500' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <defs>
+        <filter id='heroGlow' x='-40%' y='-40%' width='180%' height='180%'>
+          <feGaussianBlur stdDeviation='7' result='blur' />
+          <feComposite in='SourceGraphic' in2='blur' operator='over' />
+        </filter>
+        <filter id='heroSoftGlow' x='-50%' y='-50%' width='200%' height='200%'>
+          <feGaussianBlur stdDeviation='12' result='blur' />
+          <feColorMatrix
+            in='blur'
+            type='matrix'
+            values='1 0 0 0 0  0 0.75 0 0 0  0 0 1 0 0  0 0 0 0.65 0'
+          />
+        </filter>
+        <radialGradient id='heroZodiacGlow' cx='50%' cy='50%' r='60%'>
+          <stop offset='0%' stopColor='#ffffff' stopOpacity='0.12' />
+          <stop offset='35%' stopColor='#7b6bb4' stopOpacity='0.14' />
+          <stop offset='72%' stopColor='#5f4b9a' stopOpacity='0.16' />
+          <stop offset='100%' stopColor='#0d0717' stopOpacity='0' />
+        </radialGradient>
+        <radialGradient id='heroWheelFill' cx='50%' cy='50%' r='70%'>
+          <stop offset='0%' stopColor='#cfc8ee' stopOpacity='0.08' />
+          <stop offset='24%' stopColor='#6f5ea8' stopOpacity='0.15' />
+          <stop offset='60%' stopColor='#4f3b82' stopOpacity='0.24' />
+          <stop offset='100%' stopColor='#211d49' stopOpacity='0.98' />
+        </radialGradient>
+        <linearGradient id='heroWheelStroke' x1='80' y1='40' x2='420' y2='460'>
+          <stop offset='0%' stopColor='#ffffff' stopOpacity='0.95' />
+          <stop offset='28%' stopColor='#9f92d1' stopOpacity='0.54' />
+          <stop offset='62%' stopColor='#6a5aa4' stopOpacity='0.6' />
+          <stop offset='100%' stopColor='#514284' stopOpacity='0.56' />
+        </linearGradient>
+        <linearGradient id='heroSectorGlow' x1='120' y1='95' x2='390' y2='405'>
+          <stop offset='0%' stopColor='#c8c1e6' stopOpacity='0.08' />
+          <stop offset='50%' stopColor='#665696' stopOpacity='0.08' />
+          <stop offset='100%' stopColor='#4e4586' stopOpacity='0.14' />
+        </linearGradient>
+      </defs>
+
+      <circle cx='250' cy='250' r='242' fill='url(#heroZodiacGlow)' className='zodiac-wheel-breathe' />
+      <circle cx='250' cy='250' r='232' fill='url(#heroWheelFill)' stroke='rgba(211, 205, 236, 0.54)' strokeWidth='2.2' />
+      <circle cx='250' cy='250' r='224' stroke='rgba(132, 118, 181, 0.18)' strokeWidth='1' />
+      <circle cx='250' cy='250' r='214' stroke='rgba(95, 79, 146, 0.14)' strokeWidth='0.8' />
+
+      <g className='rotate-slow'>
+        {zodiacSigns.map((z, i) => {
+          const startAngle = i * 30;
+          const endAngle = startAngle + 30;
+          const iconAngle = startAngle + 15;
+          const iconPoint = wheelPolarPoint(168, iconAngle);
+          const labelPoint = wheelPolarPoint(204, iconAngle);
+
+          return (
+            <g key={z.name}>
+              <path
+                d={describeWheelSector(96, 220, startAngle, endAngle)}
+                fill={i % 2 === 0 ? 'url(#heroSectorGlow)' : 'rgba(255,255,255,0.035)'}
+              />
+              <path
+                d={describeWheelArc(182, startAngle + 3, endAngle - 3)}
+                stroke='rgba(157,146,209,0.12)'
+                strokeWidth='14'
+                strokeLinecap='round'
+              />
+              <g transform={`translate(${iconPoint.x}, ${iconPoint.y}) rotate(${iconAngle}) scale(2.15) translate(-12, -12)`}>
+                {zodiacIconPaths[z.icon].map((d, idx) => (
+                  <path
+                    key={`${z.name}-path-${idx}`}
+                    d={d}
+                    stroke='url(#heroWheelStroke)'
+                    strokeWidth='1.45'
+                    fill='none'
+                    filter='url(#heroGlow)'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  />
+                ))}
+              </g>
+              <text
+                x={labelPoint.x}
+                y={labelPoint.y}
+                textAnchor='middle'
+                dominantBaseline='middle'
+                fontSize='10.5'
+                fill='rgba(216,211,238,0.74)'
+                letterSpacing='1.9'
+              >
+                {z.name.toUpperCase()}
+              </text>
+            </g>
+          );
+        })}
+      </g>
+
+      <g className='rotate-reverse zodiac-wheel-mid'>
+        {Array.from({ length: 72 }).map((_, i) => {
+          const angle = i * 5;
+          const major = i % 6 === 0;
+          const start = wheelPolarPoint(212, angle);
+          const end = wheelPolarPoint(major ? 232 : 226, angle);
+          return (
+            <line
+              key={`tick-${i}`}
+              x1={start.x}
+              y1={start.y}
+              x2={end.x}
+              y2={end.y}
+              stroke={major ? 'rgba(214,209,235,0.42)' : 'rgba(106,90,164,0.18)'}
+              strokeWidth={major ? 1.5 : 0.8}
+              strokeLinecap='round'
+            />
+          );
+        })}
+        {Array.from({ length: 12 }).map((_, i) => {
+          const angle = i * 30;
+          const inner = wheelPolarPoint(82, angle);
+          const outer = wheelPolarPoint(220, angle);
+          return (
+            <line
+              key={`divider-${i}`}
+              x1={inner.x}
+              y1={inner.y}
+              x2={outer.x}
+              y2={outer.y}
+              stroke='rgba(95,79,146,0.15)'
+              strokeWidth='0.9'
+            />
+          );
+        })}
+        {[198, 156, 122, 96, 74].map((radius) => (
+          <circle
+            key={`ring-${radius}`}
+            cx='250'
+            cy='250'
+            r={radius}
+            stroke={radius === 156 ? 'url(#heroWheelStroke)' : 'rgba(95,79,146,0.18)'}
+            strokeWidth={radius === 156 ? '1.4' : '0.9'}
+          />
+        ))}
+        {Array.from({ length: 24 }).map((_, i) => {
+          const point = wheelPolarPoint(139, i * 15);
+          return (
+            <circle
+              key={`dot-${i}`}
+              cx={point.x}
+              cy={point.y}
+              r={i % 2 === 0 ? '2.6' : '1.6'}
+              fill={i % 2 === 0 ? 'rgba(223,218,241,0.54)' : 'rgba(110,95,166,0.42)'}
+            />
+          );
+        })}
+      </g>
+
+      <g className='rotate-med zodiac-wheel-core'>
+        <circle cx='250' cy='250' r='66' fill='rgba(37,31,74,0.68)' stroke='rgba(132,118,181,0.2)' strokeWidth='1' />
+        <path
+          d='M250 183 L272 228 L321 228 L282 257 L296 307 L250 279 L204 307 L218 257 L179 228 L228 228 Z'
+          fill='rgba(85,72,138,0.16)'
+          stroke='url(#heroWheelStroke)'
+          strokeWidth='1.5'
+          filter='url(#heroGlow)'
+        />
+        <path
+          d='M250 199 L285 215 L301 250 L285 285 L250 301 L215 285 L199 250 L215 215 Z'
+          fill='none'
+          stroke='rgba(157,146,209,0.28)'
+          strokeWidth='1'
+        />
+        {Array.from({ length: 12 }).map((_, i) => {
+          const angle = i * 30;
+          const start = wheelPolarPoint(18, angle);
+          const end = wheelPolarPoint(58, angle);
+          return (
+            <line
+              key={`ray-${i}`}
+              x1={start.x}
+              y1={start.y}
+              x2={end.x}
+              y2={end.y}
+              stroke='rgba(157,146,209,0.3)'
+              strokeWidth='1'
+            />
+          );
+        })}
+        <circle cx='250' cy='250' r='34' fill='rgba(132,118,181,0.08)' stroke='rgba(157,146,209,0.28)' strokeWidth='1.2' />
+        <circle cx='250' cy='250' r='9' fill='#fff' filter='url(#heroSoftGlow)' />
+      </g>
+    </svg>
+  );
+}
+
+function ClassicZodiacWheel() {
+  return (
+    <svg className='cosmic-expert-svg' viewBox='0 0 500 500' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <defs>
+        <filter id='classicGlow' x='-30%' y='-30%' width='160%' height='160%'>
+          <feGaussianBlur stdDeviation='6' result='blur' />
+          <feComposite in='SourceGraphic' in2='blur' operator='over' />
+        </filter>
+        <radialGradient id='classicZodiacGradient' cx='50%' cy='50%' r='50%'>
+          <stop offset='0%' stopColor='rgba(168, 85, 247, 0.3)' />
+          <stop offset='60%' stopColor='rgba(236, 72, 153, 0.15)' />
+          <stop offset='100%' stopColor='transparent' />
+        </radialGradient>
+      </defs>
+
+      <circle cx='250' cy='250' r='240' fill='url(#classicZodiacGradient)' />
+
+      <g className='rotate-slow'>
+        <circle cx='250' cy='250' r='230' stroke='rgba(255, 255, 255, 0.4)' strokeWidth='1' />
+        <circle cx='250' cy='250' r='222' stroke='rgba(255, 255, 255, 0.2)' strokeWidth='0.5' />
+        {Array.from({ length: 36 }).map((_, i) => {
+          const angle = i * 10 * Math.PI / 180;
+          const x1 = (250 + 222 * Math.cos(angle)).toFixed(2);
+          const y1 = (250 + 222 * Math.sin(angle)).toFixed(2);
+          const x2 = (250 + 230 * Math.cos(angle)).toFixed(2);
+          const y2 = (250 + 230 * Math.sin(angle)).toFixed(2);
+          return (
+            <line
+              key={`classic-tick-${i}`}
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              stroke='rgba(255, 255, 255, 0.3)'
+              strokeWidth='0.5'
+            />
+          );
+        })}
+
+        {zodiacSigns.map((z, i) => {
+          const angle = (i * 30 - 90) * Math.PI / 180;
+          const x1 = (250 + 100 * Math.cos(angle)).toFixed(2);
+          const y1 = (250 + 100 * Math.sin(angle)).toFixed(2);
+          const x2 = (250 + 222 * Math.cos(angle)).toFixed(2);
+          const y2 = (250 + 222 * Math.sin(angle)).toFixed(2);
+          const sx = (250 + 155 * Math.cos(angle + 15 * Math.PI / 180)).toFixed(2);
+          const sy = (250 + 155 * Math.sin(angle + 15 * Math.PI / 180)).toFixed(2);
+          const lx = (250 + 205 * Math.cos(angle + 15 * Math.PI / 180)).toFixed(2);
+          const ly = (250 + 205 * Math.sin(angle + 15 * Math.PI / 180)).toFixed(2);
+
+          return (
+            <g key={z.name}>
+              <line x1={x1} y1={y1} x2={x2} y2={y2} stroke='rgba(255, 255, 255, 0.15)' strokeWidth='0.5' />
+              <g transform={`translate(${sx}, ${sy}) rotate(${i * 30}) scale(2) translate(-12, -12)`}>
+                {zodiacIconPaths[z.icon].map((d, idx) => (
+                  <path
+                    key={`${z.name}-classic-path-${idx}`}
+                    d={d}
+                    stroke='white'
+                    strokeWidth='1.5'
+                    fill='none'
+                    filter='url(#classicGlow)'
+                  />
+                ))}
+              </g>
+              <text
+                x={lx}
+                y={ly}
+                textAnchor='middle'
+                dominantBaseline='middle'
+                fontSize='9'
+                fill='rgba(255, 255, 255, 0.75)'
+                letterSpacing='1.2'
+                style={{ transform: `rotate(${i * 30}deg)`, transformOrigin: `${lx}px ${ly}px` }}
+              >
+                {z.name.toUpperCase()}
+              </text>
+            </g>
+          );
+        })}
+
+        <circle cx='250' cy='250' r='100' stroke='rgba(255, 255, 255, 0.3)' strokeWidth='1' />
+        <circle cx='250' cy='250' r='92' stroke='rgba(255, 255, 255, 0.1)' strokeWidth='0.5' />
+      </g>
+
+      <g className='rotate-med' filter='url(#classicGlow)'>
+        <path
+          d='M250 150 L280 220 L350 220 L295 265 L315 335 L250 290 L185 335 L205 265 L150 220 L220 220 Z'
+          fill='none'
+          stroke='rgba(251, 191, 36, 0.8)'
+          strokeWidth='1.5'
+        />
+        <circle cx='250' cy='250' r='50' stroke='rgba(251, 191, 36, 0.4)' strokeWidth='1' />
+        <circle cx='250' cy='250' r='5' fill='#fbbf24' />
+        {Array.from({ length: 8 }).map((_, i) => {
+          const a = i * 45 * Math.PI / 180;
+          return (
+            <line
+              key={`classic-star-ray-${i}`}
+              x1={250 + 5 * Math.cos(a)}
+              y1={250 + 5 * Math.sin(a)}
+              x2={250 + 45 * Math.cos(a)}
+              y2={250 + 45 * Math.sin(a)}
+              stroke='rgba(251, 191, 36, 0.6)'
+              strokeWidth='1'
+            />
+          );
+        })}
+      </g>
+    </svg>
+  );
+}
 export default function Home() {
   return (
     <>
@@ -454,7 +790,7 @@ export default function Home() {
           <div className="dust dust-two" />
           <div className="nebula nebula-left" />
           <div className="nebula nebula-right" />
-          <div className="crescent" />
+
 
           <section className="hero-layout">
             <div className="hero-copy">
@@ -476,31 +812,12 @@ export default function Home() {
               </div>
             </div>
 
-            <aside className="quick-form-card">
-              <p className="form-kicker">Quick Form</p>
-              <h2>Enter Your Birth Details</h2>
-              <form className="birth-form">
-                <label className="field">
-                  <span>Name</span>
-                  <input type="text" placeholder="Your full name" />
-                </label>
-                <label className="field">
-                  <span>Date of Birth</span>
-                  <input type="date" />
-                </label>
-                <label className="field">
-                  <span>Time of Birth</span>
-                  <input type="time" />
-                </label>
-                <label className="field">
-                  <span>Place of Birth</span>
-                  <input type="text" placeholder="City, State, Country" />
-                </label>
-                <button type="submit" className="btn btn-primary form-submit">
-                  Generate My Kundli
-                </button>
-              </form>
-            </aside>
+            <div className='hero-visual' aria-hidden='true'>
+              <div className='hero-wheel-shell'>
+                <PinkZodiacWheel />
+              </div>
+            </div>
+
           </section>
 
         </section>
@@ -576,120 +893,7 @@ export default function Home() {
             <div className="experts-showcase">
               <div className="experts-visual" aria-hidden="true">
                 <div className="experts-portrait">
-                  <svg className="cosmic-expert-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-                        <feGaussianBlur stdDeviation="6" result="blur" />
-                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                      </filter>
-                      <radialGradient id="zodiacGradient" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stopColor="rgba(168, 85, 247, 0.3)" />
-                        <stop offset="60%" stopColor="rgba(236, 72, 153, 0.15)" />
-                        <stop offset="100%" stopColor="transparent" />
-                      </radialGradient>
-                    </defs>
-
-                    {/* Background Glow */}
-                    <circle cx="250" cy="250" r="240" fill="url(#zodiacGradient)" />
-
-                    {/* Rotating Zodiac Wheel Structure */}
-                    <g className="rotate-slow">
-                      {/* Outer double border with ticks */}
-                      <circle cx="250" cy="250" r="230" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1" />
-                      <circle cx="250" cy="250" r="222" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="0.5" />
-                      {Array.from({ length: 36 }).map((_, i) => {
-                        const angle = i * 10 * Math.PI / 180;
-                        const x1 = (250 + 222 * Math.cos(angle)).toFixed(2);
-                        const y1 = (250 + 222 * Math.sin(angle)).toFixed(2);
-                        const x2 = (250 + 230 * Math.cos(angle)).toFixed(2);
-                        const y2 = (250 + 230 * Math.sin(angle)).toFixed(2);
-                        return (
-                          <line 
-                            key={`tick-${i}`}
-                            x1={x1}
-                            y1={y1}
-                            x2={x2}
-                            y2={y2}
-                            stroke="rgba(255, 255, 255, 0.3)"
-                            strokeWidth="0.5"
-                          />
-                        );
-                      })}
-
-                      {/* Zodiac Sections and Symbols */}
-                      {zodiacSigns.map((z, i) => {
-                        const angle = (i * 30 - 90) * Math.PI / 180;
-                        
-                        // Section dividers
-                        const x1 = (250 + 100 * Math.cos(angle)).toFixed(2);
-                        const y1 = (250 + 100 * Math.sin(angle)).toFixed(2);
-                        const x2 = (250 + 222 * Math.cos(angle)).toFixed(2);
-                        const y2 = (250 + 222 * Math.sin(angle)).toFixed(2);
-                        
-                        // Symbol and Label positions
-                        const sx = (250 + 155 * Math.cos(angle + 15 * Math.PI / 180)).toFixed(2);
-                        const sy = (250 + 155 * Math.sin(angle + 15 * Math.PI / 180)).toFixed(2);
-                        const lx = (250 + 205 * Math.cos(angle + 15 * Math.PI / 180)).toFixed(2);
-                        const ly = (250 + 205 * Math.sin(angle + 15 * Math.PI / 180)).toFixed(2);
-
-                        return (
-                          <g key={z.name}>
-                            <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
-                            
-                            {/* The Symbol Icon (using paths from zodiacIconPaths) */}
-                            <g 
-                              transform={`translate(${sx}, ${sy}) rotate(${i * 30}) scale(2) translate(-12, -12)`}
-                            >
-                              {zodiacIconPaths[z.icon].map((d, idx) => (
-                                <path 
-                                  key={`${z.name}-path-${idx}`} 
-                                  d={d} 
-                                  stroke="white" 
-                                  strokeWidth="1.5" 
-                                  fill="none" 
-                                  filter="url(#glow)"
-                                />
-                              ))}
-                            </g>
-
-                            <text 
-                              x={lx} y={ly} 
-                              textAnchor="middle" dominantBaseline="middle" 
-                              fontSize="9" fill="rgba(255, 255, 255, 0.75)" letterSpacing="1.2"
-                              style={{ transform: `rotate(${i * 30}deg)`, transformOrigin: `${lx}px ${ly}px` }}
-                            >
-                              {z.name.toUpperCase()}
-                            </text>
-                          </g>
-                        );
-                      })}
-
-                      {/* Inner Circles */}
-                      <circle cx="250" cy="250" r="100" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="1" />
-                      <circle cx="250" cy="250" r="92" stroke="rgba(255, 255, 255, 0.1)" strokeWidth="0.5" />
-                    </g>
-
-                    {/* Central Mystic Star (Metatron-inspired) */}
-                    <g className="rotate-med " filter="url(#glow)">
-                      <path 
-                        d="M250 150 L280 220 L350 220 L295 265 L315 335 L250 290 L185 335 L205 265 L150 220 L220 220 Z" 
-                        fill="none" stroke="rgba(251, 191, 36, 0.8)" strokeWidth="1.5"
-                      />
-                      <circle cx="250" cy="250" r="50" stroke="rgba(251, 191, 36, 0.4)" strokeWidth="1" />
-                      <circle cx="250" cy="250" r="5" fill="#fbbf24" />
-                      {Array.from({ length: 8 }).map((_, i) => {
-                        const a = i * 45 * Math.PI / 180;
-                        return (
-                          <line 
-                            key={`star-ray-${i}`}
-                            x1={250 + 5 * Math.cos(a)} y1={250 + 5 * Math.sin(a)}
-                            x2={250 + 45 * Math.cos(a)} y2={250 + 45 * Math.sin(a)}
-                            stroke="rgba(251, 191, 36, 0.6)" strokeWidth="1"
-                          />
-                        );
-                      })}
-                    </g>
-                  </svg>
+                  <ClassicZodiacWheel />
                 </div>
               </div>
 
@@ -1113,6 +1317,16 @@ export default function Home() {
     </>
   );
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
