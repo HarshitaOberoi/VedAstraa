@@ -1408,13 +1408,13 @@ ul {
 }
 
 .hero-copy h1 {
-  font-size: clamp(4.5rem, 9vw, 8rem);
-  line-height: 0.92;
+  font-size: clamp(2.5rem, 8.5vw, 9.5rem);
+  line-height: 0.97;
 }
 
 .section-title {
-  font-size: clamp(2.3rem, 4.6vw, 4rem);
-  line-height: 1.02;
+  font-size: clamp(1.8rem, 4vw, 4rem);
+  line-height: 1.1;
 }
 
 .hero-text,
@@ -1546,6 +1546,12 @@ ul {
   position: relative;
   padding: 8rem 2rem;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .trust-section {
+    padding: 4.5rem 1.25rem;
+  }
 }
 
 .trust-section::before {
@@ -2643,6 +2649,18 @@ ul {
   .horoscope-section {
     display: none !important;
   }
+  
+  .trust-grid,
+  .services-grid,
+  .tools-grid,
+  .why-grid,
+  .testimonials-grid,
+  .how-grid,
+  .experts-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
   .footer-links-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem 1.5rem;
@@ -2664,6 +2682,29 @@ ul {
 @media (max-width: 480px) {
   .footer-links-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .nav-bar {
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .nav-link {
+    font-size: 0.75rem;
+  }
+
+  .brand-mark {
+    font-size: 1.5rem;
   }
 }
 
@@ -2713,6 +2754,21 @@ ul {
     grid-template-columns: 1fr;
     gap: 3rem;
     padding-top: 3rem;
+  }
+
+  .hero-visual {
+    width: 100%;
+    max-width: 620px;
+    min-height: auto;
+    aspect-ratio: 1;
+    transform: none;
+    justify-self: center;
+    margin: 2rem auto 0;
+  }
+
+  .hero-wheel-shell {
+    width: 100%;
+    max-width: 540px;
   }
 
   .hero-copy,
